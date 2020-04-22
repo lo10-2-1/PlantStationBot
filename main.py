@@ -1,12 +1,13 @@
 '''Links for help:
 https://github.com/python-telegram-bot/python-telegram-bot/blob/master/README.rst
 '''
+from priv import TOKEN
 
 def main():
     from telegram.ext import Updater, CommandHandler
     import logging
 
-    updater = Updater(token='1157983371:AAEzM_LHvpEyLRHAGnpHZfa0tZkH_Nfm0H8', 
+    updater = Updater(token=TOKEN, 
                         use_context=True)
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
