@@ -1,57 +1,67 @@
-from sqlalchemy import Column, Integer, ForeignKey, Text, DateTime, String, BigInteger
+from sqlalchemy import Column, Integer, ForeignKey, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
 Base = declarative_base()
 
 
-class User(Base):
-    __tablename__ = 'user'
-    id = Column(Integer, primary_key=True)
-    telegram_id = Column(BigInteger)
-    created_at = Column(DateTime)
-    upload_rating = Column(Integer, default=0)
-    view_rating = Column(Integer, default=0)
-    chat_name = Column(String)
-    first_name = Column(String)
-    last_name = Column(String)
-    login = Column(String)
-    language_code = Column(String)
-    role = Column(String)
+class Users(Base):
+    __tablename__ = 'Users'
+    user_id = Column(Integer, primary_key=True, unique=True)
+    telegram_id = Column(Integer)
+    first_name = Column(Text)
+    last_name = Column(Text)
+    login = Column(Text)
+    role = Column(Integer)
 
 
-class Img(Base):
-    __tablename__ = 'img'
-    id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('user.id'))
-    created_at = Column(DateTime)
-    archived_at = Column(DateTime)
-    sum_rating = Column(Integer)
+class Plants(Base):
+    __tablename__ = 'Plants'
+    plant_id = Column(Integer, primary_key=True, unique=True)
     name = Column(Text)
-    media_type = Column(Text)
-    count_rating = Column(Integer)
-    rank = Column(Integer)
-    telegram_file_id = Column(Text)
-    reports_count = Column(Integer)
-    user = relationship(User)
+    description = Column(Text)
+    light = Column(Text)
+    temperature = Column(Text)
+    watering = Column(Text)
+    spraying = Column(Text)
+    fertilizer = Column(Text)
+    transfer = Column(Text)
+    reproduction = Column(Text)
+    photo = Column(Text)
 
 
-class Show(Base):
-    __tablename__ = 'show'
-    id = Column(Integer, primary_key=True)
-    img_id = Column(Integer, ForeignKey('img.id'))
-    user_id = Column(Integer, ForeignKey('user.id'))
-    rating = Column(Integer)
-    created_at = Column(DateTime)
-    rated_at = Column(DateTime)
-    reported_at = Column(DateTime)
-    img = relationship(Img)
-    user = relationship(User)
+class UsersPlants(Base):
+    __tablename__ = 'UsersPlants'
+    user_plant_id = Column(Integer, primary_key=True, unique=True)
+    user_id = Column(Integer, ForeignKey('Users.user_id'))
+    plant_id = Column(Integer, ForeignKey('Plants.plant_id'))
+    name = Column(Text)
+    created = Column(Integer)
+    users = relationship(Users)
+    plants = relationship(Plants)
 
 
-class InlineQuery(Base):
-    __tablename__ = 'InlineQuery'
-    id = Column(Integer, primary_key=True)
-    telegram_id = Column(BigInteger)
-    query = Column(Text)
-    created_at = Column(DateTime)
+class NotificationCategory(Base):
+    __tablename__ = 'NotificationCategory'
+    id = Column(Integer, primary_key=True, unique=True)
+    category = Column(Text)
+
+
+class NotificationFrequency(Base):
+    __tablename__ = 'NotificationFrequency'
+    id = Column(Integer, primary_key=True, unique=True)
+    frequency = Column(Text)
+
+
+class UsersNotifications(Base):
+    __tablename__ = 'UsersNotifications'
+    notific_id = Column(Integer, primary_key=True, unique=True)
+    user_plant_id = Column(Integer, ForeignKey('UsersPlants.user_plant_id'))
+    notif_category = Column(Integer, ForeignKey('NotificationCategory.id'))
+    notif_frequency = Column(Integer, ForeignKey('NotificationFrequency.id'))
+    time = Column(Text)
+    first_data = Column(Text)
+    next_data = Column(Text)
+    usersplants = relationship(UsersPlants)
+    notificationcategory = relationship(NotificationCategory)
+    notificationfrequency = relationship(NotificationFrequency)

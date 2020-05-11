@@ -1,7 +1,7 @@
 from db_classes import *
 from sqlalchemy.orm import sessionmaker, load_only
 from sqlalchemy import create_engine, and_
-from config import logindb, passdb, dbhost, dbname
+# from config import logindb, passdb, dbhost, dbname
 import datetime
 from sqlalchemy.sql import func
 
