@@ -34,11 +34,9 @@ class UsersPlants(Base):
     __tablename__ = 'UsersPlants'
     user_plant_id = Column(Integer, primary_key=True, unique=True)
     user_id = Column(Integer, ForeignKey('Users.user_id'))
-    plant_id = Column(Integer, ForeignKey('Plants.plant_id'))
     name = Column(Text)
-    created = Column(Integer)
+    created = Column(Text)
     users = relationship(Users)
-    plants = relationship(Plants)
 
 
 class NotificationCategory(Base):
@@ -60,8 +58,8 @@ class UsersNotifications(Base):
     notif_category = Column(Integer, ForeignKey('NotificationCategory.id'))
     notif_frequency = Column(Integer, ForeignKey('NotificationFrequency.id'))
     time = Column(Text)
-    first_data = Column(Text)
-    next_data = Column(Text)
+    first_date = Column(Text)
+    next_date = Column(Text)
     usersplants = relationship(UsersPlants)
     notificationcategory = relationship(NotificationCategory)
     notificationfrequency = relationship(NotificationFrequency)
