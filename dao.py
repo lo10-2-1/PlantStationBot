@@ -44,7 +44,10 @@ def add_user_by_telegram(telegram_id: int, first_name: str, last_name: str, logi
 
 
 def update_user_role(user_id: int, role: int):
-    pass
+    session.query(Users) \
+        .filter(Users.user_id == user_id) \
+        .update({'role': role})
+    session.commit()
 
 
 def is_plant_exists(plant_title: str) -> bool:
@@ -67,7 +70,8 @@ def get_plant(plant_id: int):
     return plant_all
 
 
-def add_plant(plant_title: str, description=None, light=None, temperature=None, watering=None, spraying=None, fertilizer=None, transfer=None, reproduction=None, photo_link=None):
+def add_plant(plant_title: str, description=None, light=None, temperature=None, watering=None, 
+            spraying=None, fertilizer=None, transfer=None, reproduction=None, photo_link=None):
     session.add(Plants(name=plant_title,
                      description=description,
                      light=light,
@@ -83,8 +87,18 @@ def add_plant(plant_title: str, description=None, light=None, temperature=None, 
     session.commit()
 
 
-def update_plant(plant_id: int, plant_title=None, description=None, light=None, temperature=None, watering=None, spraying=None, fertilizer=None, transfer=None, reproduction=None, photo_link=None):
-    pass
+def update_plant(plant_id: int, plant_title=False, description=False, light=False, temperature=False, 
+            watering=False, spraying=False, fertilizer=False, transfer=False, reproduction=False, photo_link=False):
+    update = [plant_title, description, light, temperature, 
+            watering, spraying, fertilizer, transfer, reproduction, photo_link]
+    update_title = ['plant_title', 'description', 'light', 'temperature', 
+            'watering', 'spraying', 'fertilizer', 'transfer', 'reproduction', 'photo_link']
+    for i in range(len(update)):
+        if update[i]:
+            session.query(Plants) \
+            .filter(Plants.plant_id == plant_id) \
+            .update({update_title[i]: update[i]})
+    session.commit()
 
 
 def is_user_plant_exists(user_id: int, plant_name: str) -> bool:
@@ -119,7 +133,11 @@ def add_plant_to_user(user_id: int, plant_name: str, created: str):
 
 
 def delete_user_plant(user_id: int, plant_name: str):
-    pass
+    session.query(UsersPlants) \
+        .filter(UsersPlants.user_id == user_id, 
+                UsersPlants.name.ilike('%{}%'.format(plant_name))) \
+        .delete(synchronize_session=False)
+    session.commit()
 
 
 def get_notif_categories():
@@ -183,9 +201,19 @@ def add_user_notification(user_plant_id: int, notif_category: int, notif_frequen
     session.commit()
 
 
-def update_user_notification(notific_id: int, notif_frequency=None, time=None, first_date=None, next_date=None):
-    pass
+def update_user_notification(notific_id: int, notif_frequency=False, time=False, first_date=False, next_date=False):
+    update = [notif_frequency, time, first_date, next_date]
+    update_title = ['notif_frequency', 'time', 'first_date', 'next_date']
+    for i in range(len(update)):
+        if update[i]:
+            session.query(UsersNotifications) \
+            .filter(UsersNotifications.notific_id == notific_id) \
+            .update({update_title[i]: update[i]})
+    session.commit()
 
 
 def delete_user_notification(notific_id: int):
-    pass
+    session.query(UsersNotifications) \
+        .filter(UsersNotifications.notific_id == notific_id) \
+        .delete(synchronize_session=False)
+    session.commit()
