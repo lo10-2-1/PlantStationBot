@@ -1,7 +1,6 @@
 from db_classes import *
 from sqlalchemy.orm import sessionmaker, load_only
 from sqlalchemy import create_engine, and_
-import datetime
 from sqlalchemy.sql import func
 
 engine = create_engine('sqlite://database.db', echo=True)
@@ -12,7 +11,7 @@ Session.configure(bind=engine)
 session = Session()
 
 
-def is_telegram_id_exists(telegram_id: int) -> bool:
+def does_telegram_id_exist(telegram_id: int) -> bool:
     query = session.query(Users) \
         .filter(Users.telegram_id == telegram_id)
     return session.query(query.exists()).scalar()
@@ -32,7 +31,7 @@ def get_user_role(telegram_id: int) -> int:
     return user.role
 
 
-def add_user_by_telegram(telegram_id: int, first_name: str, last_name: str, login: str, role = 0):
+def add_user_by_telegram(telegram_id: int, login: str, role = 0, first_name: str=None, last_name: str=None):
     session.add(Users(telegram_id=telegram_id,
                      first_name=first_name,
                      last_name=last_name,
@@ -50,7 +49,7 @@ def update_user_role(user_id: int, role: int):
     session.commit()
 
 
-def is_plant_exists(plant_title: str) -> bool:
+def does_plant_exist(plant_title: str) -> bool:
     query = session.query(Plants) \
         .filter(Plants.name.ilike('%{}%'.format(plant_title)))
     return session.query(query.exists()).scalar()
@@ -101,7 +100,7 @@ def update_plant(plant_id: int, plant_title=False, description=False, light=Fals
     session.commit()
 
 
-def is_user_plant_exists(user_id: int, plant_name: str) -> bool:
+def does_user_plant_exist(user_id: int, plant_name: str) -> bool:
     query = session.query(UsersPlants) \
         .filter(UsersPlants.user_id == user_id, 
                 UsersPlants.name.ilike('%{}%'.format(plant_name)))
@@ -154,7 +153,7 @@ def get_notif_category_id(category: str) -> int:
     return notif_category_id.id
 
 
-def get_notif_frequencies(user_id: int):
+def get_notif_frequencies():
     notif_frequencies = session.query(NotificationFrequency.frequency) \
         .order_by(NotificationFrequency.id) \
         .all()
@@ -168,7 +167,7 @@ def get_notif_frequency_id(frequency: str) -> int:
     return notif_frequency_id.id
 
 
-def is_user_notification_exists(user_plant_id: int, notif_category: int) -> bool:
+def does_user_notification_exist(user_plant_id: int, notif_category: int) -> bool:
     query = session.query(UsersNotifications) \
         .filter(UsersNotifications.user_plant_id == user_plant_id, 
                 UsersNotifications.notif_category.ilike('%{}%'.format(notif_category)))
