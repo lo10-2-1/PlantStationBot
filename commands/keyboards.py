@@ -29,17 +29,5 @@ def plant_inline_keyboard(bot, chat_id):
         InlineKeyboardButton("Больше информации", #callback_data=),
         ]
     ]
-    reply_markup = InlineKeyboardMarkup(build_menu(plants_buttons_list, n_cols=2))
-    bot.send_message(chat_id=chat_id, text="What should I do with remind?🤔", reply_markup=reply_markup)
-
-
-def build_menu(buttons,
-               n_cols,
-               header_buttons=None,
-               footer_buttons=None):
-    menu = [buttons[i:i + n_cols] for i in range(0, len(buttons), n_cols)]
-    if header_buttons:
-        menu.insert(0, [header_buttons])
-    if footer_buttons:
-        menu.append([footer_buttons])
-    return menu
+    return reply_markup = InlineKeyboardMarkup()
+    # bot.send_message(chat_id=chat_id, text=, reply_markup=reply_markup)

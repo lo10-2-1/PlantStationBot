@@ -70,7 +70,7 @@ def get_plant(plant_id: int):
 
 
 def add_plant(plant_title: str, description=None, light=None, temperature=None, watering=None, 
-            moisture=None, fertilizer=None, transfer=None, reproduction=None, photo_link=None):
+            moisture=None, fertilizer=None, transfer=None, more_info=None, photo_link=None):
     session.add(Plants(name=plant_title,
                      description=description,
                      light=light,
@@ -79,7 +79,7 @@ def add_plant(plant_title: str, description=None, light=None, temperature=None, 
                      moisture=moisture,
                      fertilizer=fertilizer,
                      transfer=transfer,
-                     reproduction=reproduction,
+                     more_info=more_info,
                      photo=photo_link
                      )
                 )
@@ -87,11 +87,11 @@ def add_plant(plant_title: str, description=None, light=None, temperature=None, 
 
 
 def update_plant(plant_id: int, plant_title=False, description=False, light=False, temperature=False, 
-            watering=False, moisture=False, fertilizer=False, transfer=False, reproduction=False, photo_link=False):
+            watering=False, moisture=False, fertilizer=False, transfer=False, more_info=False, photo_link=False):
     update = [plant_title, description, light, temperature, 
-            watering, moisture, fertilizer, transfer, reproduction, photo_link]
+            watering, moisture, fertilizer, transfer, more_info, photo_link]
     update_title = ['plant_title', 'description', 'light', 'temperature', 
-            'watering', 'moisture', 'fertilizer', 'transfer', 'reproduction', 'photo_link']
+            'watering', 'moisture', 'fertilizer', 'transfer', 'more_info', 'photo_link']
     for i in range(len(update)):
         if update[i]:
             session.query(Plants) \
