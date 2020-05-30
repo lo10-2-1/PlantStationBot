@@ -23,10 +23,10 @@ class Plants(Base):
     light = Column(Text)
     temperature = Column(Text)
     watering = Column(Text)
-    spraying = Column(Text)
+    moisture = Column(Text)
     fertilizer = Column(Text)
     transfer = Column(Text)
-    reproduction = Column(Text)
+    more_info = Column(Text)
     photo = Column(Text)
 
 

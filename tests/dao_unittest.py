@@ -47,16 +47,16 @@ def test_get_plant_id_by_title():
 
 def test_get_plant():
     plant = is_plant_exists(1)
-    assert plant == <Plants(plant_id=1, name='Фиалка', description='Люблю фиалки')>
+    assert plant == <Plants(plant_id=1, name='Фиалка', description='Люблю фиалки')> #add description from db
 
 
 def test_add_plant():
     add_plant('Кипарис', 'Кто-то его загрыз')
-    add_plant('Каланхоэ', 'Всратенькое название', spraying='Не совершай ошибку')
+    add_plant('Каланхоэ', 'Всратенькое название', moisture='Не совершай ошибку')
 
 
 def test_update_plant():
-    update_plant(1, spraying='Нет, не смей')
+    update_plant(1, moisture='Нет, не смей')
     update_plant(2, fertilizer='Накорми меня')
 
 
