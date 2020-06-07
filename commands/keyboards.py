@@ -1,33 +1,78 @@
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
-from telegram import ReplyKeyboardMarkup
+from telegram import KeyboardButton, ReplyKeyboardMarkup
 from telegram import CallbackQuery
 
+MAIN_KEYBOARD = [
+    [
+        KeyboardButton('Поиск растений'),
+        KeyboardButton('Мои растения'),
+        KeyboardButton('Уведомления')
+    ]
+]
 
-MAIN_KEYBOARD = ReplyKeyboardMarkup([['Поиск растений', 'Мои растения', 'Уведомления']], 
-                                    resize_keyboard=True)
+USER_KEYBOARD = [
+    [
+        KeyboardButton('Список растений')
+    ],
+    [
+        KeyboardButton('Добавить'),
+        KeyboardButton('Удалить')
+    ]
+]
+
+NOTIFICATIONS_KEYBOARD = [
+    [
+        KeyboardButton('Список уведомлений')
+    ],
+    [
+        KeyboardButton('Добавить'),
+        KeyboardButton('Изменить'),
+        KeyboardButton('Удалить')
+    ]
+]
+
+LIGHT = 'light'
+TEMPERATURE = 'temperature'
+WATERING = 'watering'
+MOISTURE = 'moisture'
+FERTILIZER = 'fertilizer'
+TRANSFER = 'transfer'
+MORE_INFO = 'more_info'
+
+TITLES = {
+    LIGHT: 'Освещение',
+    TEMPERATURE: 'Температура',
+    WATERING: 'Полив',
+    MOISTURE: 'Влажность',
+    FERTILIZER: 'Удобрения',
+    TRANSFER: 'Пересадка',
+    MORE_INFO: 'Подробнее'
+}
 
 
-def create_keyboard():
-    pass
+def create_reply_keyboard(keyboard: list):
+    return ReplyKeyboardMarkup(
+        keyboard=keyboard,
+        resize_keyboard=True,
+    )
 
 
 def plant_inline_keyboard(bot, chat_id):
-    plants_buttons_list = [
+    plant_buttons_list = [
         [
-        InlineKeyboardButton("Освещение", #callback_data=),
-        InlineKeyboardButton("Температура", #callback_data=),
+        InlineKeyboardButton(TITLES[LIGHT], callback_data=LIGHT),
+        InlineKeyboardButton(TITLES[TEMPERATURE], callback_data=TEMPERATURE),
         ],
         [
-        InlineKeyboardButton("Полив", #callback_data=),
-        InlineKeyboardButton("Влажность", #callback_data=)
+        InlineKeyboardButton(TITLES[WATERING], callback_data=WATERING),
+        InlineKeyboardButton(TITLES[MOISTURE], callback_data=MOISTURE)
         ],
         [
-        InlineKeyboardButton("Удобрения", #callback_data=),
-        InlineKeyboardButton("Пересадка", #callback_data=)
+        InlineKeyboardButton(TITLES[FERTILIZER], callback_data=FERTILIZER),
+        InlineKeyboardButton(TITLES[TRANSFER], callback_data=TRANSFER)
         ],
         [
-        InlineKeyboardButton("Больше информации", #callback_data=),
+        InlineKeyboardButton(TITLES[MORE_INFO], callback_data=MORE_INFO),
         ]
     ]
-    return reply_markup = InlineKeyboardMarkup()
-    # bot.send_message(chat_id=chat_id, text=, reply_markup=reply_markup)
+    return InlineKeyboardMarkup(plant_buttons_list)

@@ -1,3 +1,5 @@
+from commands.keyboards import *
+
 def search_plant():
     pass
 
