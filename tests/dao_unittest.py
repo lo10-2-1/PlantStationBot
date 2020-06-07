@@ -1,28 +1,29 @@
 import unittest
 import datetime
 from dao import *
+from priv import *
 
 
 def test_does_telegram_id_exist():
-    user_1 = does_telegram_id_exist(354668710)
+    user_1 = does_telegram_id_exist(USER_2[0])
     user_2 = does_telegram_id_exist(2438757923547)
     assert user_1 == True
     assert user_2 == False
 
 
 def test_get_user_id_by_telegram_id():
-    user_id = get_user_id_by_telegram_id(354668710)
+    user_id = get_user_id_by_telegram_id(USER_2[0])
     assert user_id == 1
 
 
 def test_get_user_role():
-    user_role = get_user_role(354668710)
+    user_role = get_user_role(USER_2[0])
     assert user_role == 1
 
 
 def test_add_user_by_telegram():
-    add_user_by_telegram(277352270, 'Leddavlet')
-    add_user_by_telegram(354668710, 'lidrudakova', 1, 'Lydia', 'Rudakova')
+    add_user_by_telegram(USER_1[0], USER_1[1])
+    add_user_by_telegram(USER_2[0], USER_2[1], USER_2[2], USER_2[3], USER_2[4])
 
 
 def test_update_user_role():
@@ -39,15 +40,15 @@ def test_does_plant_exist():
 
 
 def test_get_plant_id_by_title():
-    plant_1 = is_plant_exists('Фиалка')
-    plant_2 = is_plant_exists('роза')
+    plant_1 = get_plant_id_by_title('Фиалка')
+    plant_2 = get_plant_id_by_title('роза')
     assert plant_1 == 1
     assert plant_2 == 2
 
 
 def test_get_plant():
-    plant = is_plant_exists(1)
-    assert plant == <Plants(plant_id=1, name='Фиалка', description='Люблю фиалки')> #add description from db
+    plant = get_plant(1)
+    assert plant == PLANT_1
 
 
 def test_add_plant():
@@ -66,25 +67,24 @@ def test_does_user_plant_exist():
     user_plant_3 = does_user_plant_exist(1, 'елка раз')
     assert user_plant_1 == True
     assert user_plant_2 == True
-    assert User_plant_3 == False
+    assert user_plant_3 == False
 
 
 def test_get_user_plants():
     user_plants = get_user_plants(1)
-    assert user_plants == [<UsersPlants(user_plant_id=1, user_id=1, name='Фиалка раз')>,
-                        <UsersPlants(user_plant_id=2, user_id=1, name='Фиалка два')>]
+    assert user_plants == USERS_PLANTS
 
 
 def test_get_user_plant_id():
-    user_plant_id_1 = is_user_plant_exists(1, 'Фиалка раз')
-    user_plant_id_2 = is_user_plant_exists(1, 'фиалка два')
-    assert user_plant_1 == 1
-    assert user_plant_2 == 2
+    user_plant_id_1 = does_user_plant_exist(1, 'Фиалка раз')
+    user_plant_id_2 = does_user_plant_exist(1, 'фиалка два')
+    assert user_plant_id_1 == 1
+    assert user_plant_id_2 == 2
 
 
 def test_add_plant_to_user():
-    add_plant_to_user(2, 'Фикус Георгий', str(datetime.now()))
-    add_plant_to_user(2, 'Елощка', str(datetime.now()))
+    add_plant_to_user(2, 'Фикус Георгий', str(datetime.datetime.now()))
+    add_plant_to_user(2, 'Елощка', str(datetime.datetime.now()))
 
 
 def test_delete_user_plant():
@@ -94,10 +94,7 @@ def test_delete_user_plant():
 
 def test_get_notif_categories():
     notif_categories = get_notif_categories()
-    assert notif_categories == [<NotificationCategory(id=1, category='Полив')>,
-                            <NotificationCategory(id=2, category='Опрыскивание')>,
-                            <NotificationCategory(id=3, category='Удобрение')>,
-                            <NotificationCategory(id=4, category='Пересадка')>]
+    assert notif_categories == CATEGORIES
 
 
 def test_get_notif_category_id():
@@ -109,14 +106,7 @@ def test_get_notif_category_id():
 
 def test_get_notif_frequencies():
     notif_frequencies = get_notif_frequencies()
-    assert notif_frequencies == [<NotificationFrequency(id=1, category='Каждый день')>,
-                            <NotificationFrequency(id=2, category='Через день')>,
-                            <NotificationFrequency(id=3, category='Раз в три дня')>,
-                            <NotificationFrequency(id=4, category='Раз в неделю')>,
-                            <NotificationFrequency(id=5, category='Раз в две недели')>,
-                            <NotificationFrequency(id=6, category='Раз в месяц')>,
-                            <NotificationFrequency(id=7, category='Раз в полгода')>,
-                            <NotificationFrequency(id=8, category='Раз в год')>]
+    assert notif_frequencies == FREQUENCIES
 
 
 def test_get_notif_frequency_id():
@@ -135,8 +125,7 @@ def test_does_user_notification_exist():
 
 def test_get_user_notifications():
     user_notif = get_user_notifications(1)
-    assert user_notif == [<UsersNotifications(notific_id=1, user_plant_id=1, notif_category=1, 
-                        notif_frequency=3, time='11:00', first_date='12.05.2020', next_date='19.05.2020')>]
+    assert user_notif == NOTIFICATION_1
 
 
 def test_get_user_notification_id():
