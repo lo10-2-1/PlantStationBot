@@ -6,6 +6,8 @@ SEARCH = 'Поиск'
 MY_PLANTS = 'Мои растения'
 NOTIFICATIONS = 'Уведомления'
 
+SEARCH_PLANT = 'Найти растения'
+
 BACK = "Назад"
 
 MAIN_KEYBOARD = [
@@ -16,9 +18,9 @@ MAIN_KEYBOARD = [
     ]
 ]
 
-PLANTS_BUTTON = [
+PLANTS_KEYBOARD = [
     [
-        KeyboardButton('Найти растения')
+        KeyboardButton(SEARCH_PLANT)
     ],
     [
         KeyboardButton(BACK)
@@ -77,10 +79,6 @@ def create_reply_keyboard(keyboard: list):
         keyboard=keyboard,
         resize_keyboard=True,
     )
-
-
-def back_button_handler():
-    pass
 
 
 def plant_inline_keyboard():

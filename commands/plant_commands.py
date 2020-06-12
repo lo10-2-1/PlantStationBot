@@ -3,8 +3,14 @@ from dao import does_plant_exist, get_plant_id_by_title, get_plant
 from commands.keyboards import *
 
 
-def plants_keyboard_handler():
-    pass
+def plants_keyboard_handler(bot, update):
+    chat_id = update.effective_message.chat_id
+    text = update.message.text
+
+    if text == SEARCH_PLANT:
+        bot.send_message()
+    elif text == BACK:
+        back_button_handler()
 
 
 def search_plant(bot, update, plant_title):
@@ -22,19 +28,28 @@ def search_plant(bot, update, plant_title):
 
 
 def show_plant(bot, update, plant_obj):
+    '''Shows plant description and photo
+    '''
     chat_id = update.effective_message.chat_id
 
-    bot.send_message(text='')
+    bot.send_message(
+        chat_id=chat_id,
+        text='<b>{0}<b>\n\n{1}\n<a href="{2}">&#8288;</a>'.format(plant_obj.name, 
+                                                                plant_obj.description,
+                                                                plant_obj.photo),
+        reply_markup=plant_inline_keyboard(),
+        parse_mode='HTML'
+        )
 
 
 def plant_inline_keyboard_handler(bot, update, plant):
-    query = update.callback_query
-    data = query.data
-    
     '''All conditions work the same:
     1. Delete keyboard from previous message;
     2. Send message with the same keyboard.
     '''
+    query = update.callback_query
+    data = query.data
+    
     if data == LIGHT:
         delete_inline_keyboard(update)
         send_inline_item(bot, update, TITLES[LIGHT], plant.light)
