@@ -13,7 +13,7 @@ def start(bot, update, telegram_id):
             Если тебе нужна полная информация по функциям бота, воспользуйся командой /info.
             Также ты можешь задать вопрос администратору с помощью команды /help.""")
     update.message.reply_text(
-        "Выбери, что ты хочешь сделать.", reply_markup=MAIN_KEYBOARD)
+        "Выбери, что ты хочешь сделать.", reply_markup=create_reply_keyboard(MAIN_KEYBOARD))
 
 
 def info(bot, update):
