@@ -1,3 +1,6 @@
+def user_plants_keyboard_handler():
+    pass
+
 def show_my_plants():
     pass
 

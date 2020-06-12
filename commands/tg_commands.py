@@ -1,5 +1,8 @@
-from commands.keyboards import *
 from dao import *
+from commands.keyboards import *
+from commands.plant_commands import plants_keyboard_handler
+from commands.users_plants_commands import user_plants_keyboard_handler
+from commands.notifications_commands import notifications_keyboard_handler
 
 
 def start(bot, update, telegram_id):
@@ -14,6 +17,17 @@ def start(bot, update, telegram_id):
             Также ты можешь задать вопрос администратору с помощью команды /help.""")
     update.message.reply_text(
         "Выбери, что ты хочешь сделать.", reply_markup=create_reply_keyboard(MAIN_KEYBOARD))
+
+
+def main_keyboard_handler(update):
+    text = update.message.text
+
+    if text == SEARCH:
+        return plants_keyboard_handler()
+    elif text == MY_PLANTS:
+        return user_plants_keyboard_handler()
+    elif text == NOTIFICATIONS:
+        return notifications_keyboard_handler()
 
 
 def info(bot, update):

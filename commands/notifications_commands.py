@@ -1,3 +1,6 @@
+def notifications_keyboard_handler():
+    pass
+
 def create_notification():
     pass
 
