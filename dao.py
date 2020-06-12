@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker, load_only
 from sqlalchemy import create_engine, and_
 from sqlalchemy.sql import func
 
-engine = create_engine('sqlite://database.db', echo=True)
+engine = create_engine('sqlite:///database.db', echo=True)
 
 Session = sessionmaker(bind=engine)
 Session.configure(bind=engine)
@@ -63,10 +63,10 @@ def get_plant_id_by_title(plant_title: str) -> int:
 
 
 def get_plant(plant_id: int):
-    plant_all = session.query(Plants) \
+    plant = session.query(Plants) \
         .filter(Plants.plant_id == plant_id) \
         .first()
-    return plant_all
+    return plant
 
 
 def add_plant(plant_title: str, description=None, light=None, temperature=None, watering=None, 
@@ -108,10 +108,10 @@ def does_user_plant_exist(user_id: int, plant_name: str) -> bool:
 
 
 def get_user_plants(user_id: int):
-    user_plant = session.query(UsersPlants) \
-        .filter(UsersPlants.user_id == user_id) \
-        .all()
-    return user_plant
+    user_plants = session.query(UsersPlants) \
+                .filter(UsersPlants.user_id == user_id) \
+                .all()
+    return user_plants
 
 
 def get_user_plant_id(user_id: int, plant_name: str) -> int:
@@ -119,7 +119,7 @@ def get_user_plant_id(user_id: int, plant_name: str) -> int:
         .filter(UsersPlants.user_id == user_id,
                 UsersPlants.name.ilike('%{}%'.format(plant_name))) \
         .first()
-    return user_plant_id
+    return user_plant_id.user_plant_id
 
 
 def add_plant_to_user(user_id: int, plant_name: str, created: str):
@@ -186,7 +186,7 @@ def get_user_notification_id(user_plant_id: int, notif_category: int) -> int:
         .filter(UsersNotifications.user_plant_id == user_plant_id, 
                 UsersNotifications.notif_category.ilike('%{}%'.format(notif_category))) \
         .first()
-    return user_notification_id
+    return user_notification_id.notific_id
 
 
 def add_user_notification(user_plant_id: int, notif_category: int, notif_frequency: int, time: str, first_date: str):
