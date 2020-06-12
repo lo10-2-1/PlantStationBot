@@ -18,15 +18,15 @@ def start(bot, update, telegram_id):
 
 def info(bot, update):
     bot.send_message(chat_id=update.message.chat_id, 
-                            text="Чувак, подожди, помощи пока не жди.")
+                    text="Чувак, подожди, помощи пока не жди.")
 
 
 def help(bot, update):
     bot.send_message(chat_id=update.message.chat_id, 
-                            text="""Хочешь задать вопрос администратору бота? 
+                    text="""Хочешь задать вопрос администратору бота? 
                             Напиши его в следующем сообщении.""")
 
 
 def unknown(bot, update):
     bot.send_message(chat_id=update.message.chat_id,
-                            text="Упс, я не понял команду. Попробуй еще.")
+                    text="Упс, я не понял команду. Попробуй еще.")

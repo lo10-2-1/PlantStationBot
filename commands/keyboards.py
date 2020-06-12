@@ -57,7 +57,7 @@ def create_reply_keyboard(keyboard: list):
     )
 
 
-def plant_inline_keyboard(bot, chat_id):
+def plant_inline_keyboard():
     plant_buttons_list = [
         [
         InlineKeyboardButton(TITLES[LIGHT], callback_data=LIGHT),
@@ -76,3 +76,28 @@ def plant_inline_keyboard(bot, chat_id):
         ]
     ]
     return InlineKeyboardMarkup(plant_buttons_list)
+
+
+def send_inline_item(bot, update, title, db_item):
+    '''Sends new message with one plant item
+    '''
+    chat_id = update.effective_message.chat_id
+
+    bot.send_message(
+        chat_id=chat_id,
+        text="*{0}*\n\n{1}".format(title, db_item),
+        reply_markup=plant_inline_keyboard(),
+        parse_mode='Markdown'
+    )
+
+
+def delete_inline_keyboard(update):
+    '''Deletes inline keyboard from previous message
+    '''
+    query = update.callback_query
+    current_text = update.effective_message.text
+
+    query.edit_message_text(
+            text=current_text,
+            parse_mode='Markdown',
+        )
