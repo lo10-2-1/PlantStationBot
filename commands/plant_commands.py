@@ -8,13 +8,16 @@ def plants_keyboard_handler(bot, update):
     text = update.message.text
 
     if text == SEARCH_PLANT:
-        bot.send_message()
-    elif text == BACK:
-        back_button_handler()
+        bot.send_message(
+            chat_id=chat_id,
+            text='Какое растение вы хотите найти?'
+        )
+        search_plant(bot, update)
 
 
-def search_plant(bot, update, plant_title):
+def search_plant(bot, update):
     chat_id = update.effective_message.chat_id
+    plant_title = update.message.text
 
     if not does_plant_exist(plant_title):
         return bot.send_message(
