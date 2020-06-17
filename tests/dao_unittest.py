@@ -1,7 +1,7 @@
 import unittest
 import datetime
 from dao import *
-from priv import *
+from tests.test_constants import *
 
 
 def test_does_telegram_id_exist():
