@@ -2,6 +2,5 @@
 .vscode/
 my_env/
 venv
-Procfile.windows
 *.db
 *.db-journal
