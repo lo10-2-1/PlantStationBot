@@ -1,4 +1,4 @@
-/priv.py
+__pycache__
 .vscode/
 venv
 *.db

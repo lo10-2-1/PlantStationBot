@@ -4,11 +4,12 @@ Thanks for help in code (and some ideas):
 https://github.com/ouhettur/boobsbot
 https://github.com/dmakeienko/remind_me_bot
 '''
-from priv import TOKEN
 from telegram.ext import Updater, CommandHandler
 import logging
 from commands.tg_commands import *
+import os
 
+TOKEN = os.environ.get("PLANTSTATIONBOT_TOKEN")
 
 def main():
     updater = Updater(token=TOKEN, 
