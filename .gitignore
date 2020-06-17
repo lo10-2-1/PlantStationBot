@@ -1,6 +1,5 @@
 /priv.py
 .vscode/
-my_env/
 venv
 *.db
 *.db-journal
