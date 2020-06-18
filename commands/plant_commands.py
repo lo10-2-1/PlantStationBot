@@ -1,11 +1,16 @@
-from telegram import Message
 from dao import does_plant_exist, get_plant_id_by_title, get_plant
 from commands.keyboards import *
+from telegram import Message
 
 
 def plants_keyboard_handler(bot, update):
     chat_id = update.effective_message.chat_id
     text = update.message.text
+
+    update.message.reply_text(
+        "Выбери, что ты хочешь сделать.",
+        reply_markup=create_reply_keyboard(PLANTS_KEYBOARD)
+        )
 
     if text == SEARCH_PLANT:
         bot.send_message(

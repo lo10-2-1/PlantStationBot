@@ -27,7 +27,7 @@ PLANTS_KEYBOARD = [
     ]
 ]
 
-USER_KEYBOARD = [
+USER_PLANTS_KEYBOARD = [
     [
         KeyboardButton('Список растений')
     ],
@@ -64,13 +64,16 @@ TRANSFER = 'transfer'
 MORE_INFO = 'more_info'
 
 TITLES = {
+    NAME: 'Название',
+    DESCRIPTION: 'Описание',
     LIGHT: 'Освещение',
     TEMPERATURE: 'Температура',
     WATERING: 'Полив',
     MOISTURE: 'Влажность',
     FERTILIZER: 'Удобрения',
     TRANSFER: 'Пересадка',
-    MORE_INFO: 'Подробнее'
+    MORE_INFO: 'Подробнее',
+    PHOTO_LINK: 'Ссылка на фото'
 }
 
 
