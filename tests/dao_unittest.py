@@ -52,8 +52,8 @@ def test_get_plant():
 
 
 def test_add_plant():
-    add_plant('Кипарис', 'Кто-то его загрыз')
-    add_plant('Барбарис', 'Конфетки', moisture='Не совершай ошибку')
+    add_plant('Кипарис')
+    add_plant('Барбарис')
 
 
 def test_update_plant():

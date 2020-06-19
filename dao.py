@@ -69,20 +69,8 @@ def get_plant(plant_id: int):
     return plant
 
 
-def add_plant(plant_title: str, description=None, light=None, temperature=None, watering=None, 
-            moisture=None, fertilizer=None, transfer=None, more_info=None, photo_link=None):
-    session.add(Plants(name=plant_title,
-                     description=description,
-                     light=light,
-                     temperature=temperature,
-                     watering=watering,
-                     moisture=moisture,
-                     fertilizer=fertilizer,
-                     transfer=transfer,
-                     more_info=more_info,
-                     photo=photo_link
-                     )
-                )
+def add_plant(plant_title: str):
+    session.add(Plants(name=plant_title))
     session.commit()
 
 
