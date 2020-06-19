@@ -91,25 +91,25 @@ def update_plant_item(item_list: list):
     information = item_list[2]
     plant_id = get_plant_id_by_title(plant)
 
-    if item = TITLES[NAME]:
+    if item == TITLES[NAME]:
         update_plant(plant_id, plant_title=information)
-    elif item = TITLES[DESCRIPTION]:
+    elif item == TITLES[DESCRIPTION]:
         update_plant(plant_id, description=information)
-    elif item = TITLES[LIGHT]:
+    elif item == TITLES[LIGHT]:
         update_plant(plant_id, light=information)
-    elif item = TITLES[TEMPERATURE]:
+    elif item == TITLES[TEMPERATURE]:
         update_plant(plant_id, temperature=information)
-    elif item = TITLES[WATERING]:
+    elif item == TITLES[WATERING]:
         update_plant(plant_id, watering=information)
-    elif item = TITLES[MOISTURE]:
+    elif item == TITLES[MOISTURE]:
         update_plant(plant_id, moisture=information)
-    elif item = TITLES[FERTILIZER]:
+    elif item == TITLES[FERTILIZER]:
         update_plant(plant_id, fertilizer=information)
-    elif item = TITLES[TRANSFER]:
+    elif item == TITLES[TRANSFER]:
         update_plant(plant_id, transfer=information)
-    elif item = TITLES[MORE_INFO]:
+    elif item == TITLES[MORE_INFO]:
         update_plant(plant_id, more_info=information)
-    elif item = TITLES[PHOTO_LINK]:
+    elif item == TITLES[PHOTO_LINK]:
         update_plant(plant_id, photo_link=information)
     else:
         return 'Такого раздела нет.'
