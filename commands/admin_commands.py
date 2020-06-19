@@ -7,10 +7,11 @@ from telegram import Message
 
 def set_user_role(bot, update, args):
     '''Only for admin, role = 1
-    Common users' role = 0'''
+    Common users' role = 0
+    '''
     chat_id = update.effective_message.chat_d
-    text = update.message.text
-    
+    user_role = get_user_role(chat_id)
+
     if user_role == 1:
         args = args.split('\n')
         telegram_id = args[0]
@@ -36,8 +37,8 @@ def set_user_role(bot, update, args):
 
 def add_plant_command(bot, update, args):
     chat_id = update.effective_message.chat_d
-    text = update.message.text
-    
+    user_role = get_user_role(chat_id)
+
     if user_role == 1:
         add_plant(args)
         bot.send_message(
@@ -55,33 +56,33 @@ def update_plant_command(bot, update, args):
     '''One command for all plants' characteristics
     '''
     chat_id = update.effective_message.chat_d
-    text = update.message.text
+    user_role = get_user_role(chat_id)
     message = args.split('\n')
     plant = message[0]
     item = message[1]
-    
+
     if user_role == 1:
-        if does_plant_exist():
+        if does_plant_exist(plant):
             result = update_plant_item(message)
             if type(result) == str:
                 bot.send_message(
-                chat_id = chat_id,
-                text = result
+                chat_id=chat_id,
+                text=result
             )
             else:
                 bot.send_message(
-                    chat_id = chat_id,
-                    text = 'Раздел "{0}" растения "{1}" обновлен.'.format(item, plant)
+                    chat_id=chat_id,
+                    text='Раздел "{0}" растения "{1}" обновлен.'.format(item, plant)
                 )
         else:
             bot.send_message(
-                chat_id = chat_id,
-                text = 'Растение "{0}" не найдено.'.format(plant)
+                chat_id=chat_id,
+                text='Растение "{0}" не найдено.'.format(plant)
             )
     else:
         bot.send_message(
-            chat_id = chat_id,
-            text = 'Упс, только разработчик понимает эту команду'
+            chat_id=chat_id,
+            text='Упс, только разработчик понимает эту команду'
         )
 
 
@@ -124,7 +125,7 @@ def ask_admin(bot, update):
         text="Спасибо! Ваш вопрос отправлен."
     )
     bot.send_message(
-        chat_id=354668710, 
+        chat_id=354668710,
         text="Вопрос от пользователя:\n{0}".format(text)
     )
 
@@ -133,7 +134,7 @@ def answer_to_user(bot, update, args):
     #add to main.py commands (as /answer)
     chat_id = update.effective_message.chat_d
     user_role = get_user_role(chat_id)
-    
+
     if user_role == 1:
         user_id = args
         bot.send_message(

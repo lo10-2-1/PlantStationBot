@@ -55,6 +55,8 @@ NOTIFICATIONS_KEYBOARD = [
     ]
 ]
 
+NAME = 'name'
+DESCRIPTION = 'description'
 LIGHT = 'light'
 TEMPERATURE = 'temperature'
 WATERING = 'watering'
@@ -62,6 +64,7 @@ MOISTURE = 'moisture'
 FERTILIZER = 'fertilizer'
 TRANSFER = 'transfer'
 MORE_INFO = 'more_info'
+PHOTO_LINK = 'photo_link'
 
 TITLES = {
     NAME: 'Название',
