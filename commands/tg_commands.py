@@ -1,7 +1,6 @@
-from telegram import Message
 from dao import *
-from commands.admin_commands import ask_admin
 from commands.keyboards import *
+from commands.admin_commands import ask_admin
 from commands.plant_commands import plants_keyboard_handler
 from commands.users_plants_commands import user_plants_keyboard_handler
 from commands.notifications_commands import notifications_keyboard_handler
@@ -30,18 +29,23 @@ def main_keyboard_handler(bot, update):
     text = update.message.text
 
     if text == SEARCH:
+        update.message.reply_text(
+            "Выбери, что ты хочешь сделать.",
+            reply_markup=create_reply_keyboard(PLANTS_KEYBOARD)
+        )
         return plants_keyboard_handler(bot, update)
     elif text == MY_PLANTS:
+        update.message.reply_text(
+            "Выбери, что ты хочешь сделать.",
+            reply_markup=create_reply_keyboard(USER_PLANTS_KEYBOARD)
+        )
         return user_plants_keyboard_handler(bot, update)
     elif text == NOTIFICATIONS:
+        update.message.reply_text(
+            "Выбери, что ты хочешь сделать.",
+            reply_markup=create_reply_keyboard(NOTIFICATIONS_KEYBOARD)
+        )
         return notifications_keyboard_handler(bot, update)
-
-
-def back_button_handler(bot, update):
-    text = update.message.text
-
-    if text == BACK:
-        return start(bot, update)
 
 
 def info(bot, update):

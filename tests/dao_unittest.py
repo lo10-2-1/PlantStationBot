@@ -77,14 +77,16 @@ def test_get_user_plants():
 
 def test_get_user_plant_id():
     user_plant_id_1 = does_user_plant_exist(1, 'Фиалка раз')
-    user_plant_id_2 = does_user_plant_exist(1, 'фиалка два')
     assert user_plant_id_1 == 1
-    assert user_plant_id_2 == 2
 
 
 def test_add_plant_to_user():
     add_plant_to_user(2, 'Фикус Георгий', str(datetime.datetime.now()))
     add_plant_to_user(2, 'Елощка', str(datetime.datetime.now()))
+
+
+def test_update_user_plant_name(user_plant_id: int, new_plant_title: str):
+    update_user_plant_name(1, 'фиал_очка')
 
 
 def test_delete_user_plant():
@@ -123,8 +125,8 @@ def test_does_user_notification_exist():
     assert user_notif_2 == False
 
 
-def test_get_user_notifications():
-    user_notif = get_user_notifications(1)
+def test_get_plant_notifications():
+    user_notif = get_plant_notifications(1)
     assert user_notif == NOTIFICATION_1
 
 

@@ -7,6 +7,12 @@ MY_PLANTS = 'Мои растения'
 NOTIFICATIONS = 'Уведомления'
 
 SEARCH_PLANT = 'Найти растения'
+PLANTS_LIST = 'Список моих растений'
+NOTIF_LIST = 'Список уведомлений'
+
+ADD = 'Добавить'
+CHANGE = 'Изменить'
+DELETE = 'Удалить'
 
 BACK = "Назад"
 
@@ -20,38 +26,32 @@ MAIN_KEYBOARD = [
 
 PLANTS_KEYBOARD = [
     [
-        KeyboardButton(SEARCH_PLANT)
-    ],
-    [
+        KeyboardButton(SEARCH_PLANT),
         KeyboardButton(BACK)
     ]
 ]
 
 USER_PLANTS_KEYBOARD = [
     [
-        KeyboardButton('Список растений')
-    ],
-    [
-        KeyboardButton('Добавить'),
-        KeyboardButton('Изменить имя'),
-        KeyboardButton('Удалить')
-    ],
-    [
+        KeyboardButton(PLANTS_LIST),
         KeyboardButton(BACK)
+    ],
+    [
+        KeyboardButton(ADD),
+        KeyboardButton(CHANGE),
+        KeyboardButton(DELETE)
     ]
 ]
 
 NOTIFICATIONS_KEYBOARD = [
     [
-        KeyboardButton('Список уведомлений')
-    ],
-    [
-        KeyboardButton('Добавить'),
-        KeyboardButton('Изменить'),
-        KeyboardButton('Удалить')
-    ],
-    [
+        KeyboardButton(NOTIF_LIST),
         KeyboardButton(BACK)
+    ],
+    [
+        KeyboardButton(ADD),
+        KeyboardButton(CHANGE),
+        KeyboardButton(DELETE)
     ]
 ]
 

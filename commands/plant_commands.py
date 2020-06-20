@@ -1,5 +1,6 @@
 from dao import does_plant_exist, get_plant_id_by_title, get_plant
 from commands.keyboards import *
+from commands.tg_commands import start
 from telegram import Message
 
 
@@ -7,17 +8,14 @@ def plants_keyboard_handler(bot, update):
     chat_id = update.effective_message.chat_id
     text = update.message.text
 
-    update.message.reply_text(
-        "Выбери, что ты хочешь сделать.",
-        reply_markup=create_reply_keyboard(PLANTS_KEYBOARD)
-        )
-
     if text == SEARCH_PLANT:
         bot.send_message(
             chat_id=chat_id,
             text='Какое растение вы хотите найти?'
         )
         search_plant(bot, update)
+    elif text == BACK:
+        return start(bot, update)
 
 
 def search_plant(bot, update):

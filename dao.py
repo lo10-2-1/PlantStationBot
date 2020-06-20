@@ -119,6 +119,13 @@ def add_plant_to_user(user_id: int, plant_name: str, created: str):
     session.commit()
 
 
+def update_user_plant_name(user_plant_id: int, new_plant_title: str):
+    session.query(UsersPlants) \
+            .filter(UsersPlants.user_plant_id == user_plant_id) \
+            .update({'name': new_plant_title})
+    session.commit()
+
+
 def delete_user_plant(user_id: int, plant_name: str):
     session.query(UsersPlants) \
         .filter(UsersPlants.user_id == user_id, 
@@ -162,7 +169,7 @@ def does_user_notification_exist(user_plant_id: int, notif_category: int) -> boo
     return session.query(query.exists()).scalar()
 
 
-def get_user_notifications(user_plant_id: int):
+def get_plant_notifications(user_plant_id: int):
     user_notifications = session.query(UsersNotifications) \
         .filter(UsersNotifications.user_plant_id == user_plant_id) \
         .all()
