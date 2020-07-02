@@ -9,6 +9,10 @@
 **Solution:** add new function to dao file. It should return login of the user.
 Then add recognition of the role through keywords in function set_user_role()
 
+2. **Strings refactoring**
+
+**Task:** change all strings with .format() func to f-strings.
+
 ## Problems
 1. **show_my_notifications() func in notification_commands**
 
