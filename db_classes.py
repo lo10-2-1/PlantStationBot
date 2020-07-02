@@ -50,6 +50,8 @@ class NotificationFrequency(Base):
     __tablename__ = 'NotificationFrequency'
     id = Column(Integer, primary_key=True, unique=True)
     frequency = Column(Text)
+    day_plus = Column(Integer)
+    month_plus = Column(Integer)
 
 
 class UsersNotifications(Base):

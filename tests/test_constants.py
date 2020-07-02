@@ -13,11 +13,11 @@ CATEGORIES = ["<NotificationCategory id=1, category='Полив'>",
             "<NotificationCategory id=3, category='Удобрение'>",
             "<NotificationCategory id=4, category='Пересадка'>"]
 
-FREQUENCIES = ["<NotificationFrequency id=1, category='Каждый день'>",
-            "<NotificationFrequency id=2, category='Через день'>",
-            "<NotificationFrequency id=3, category='Раз в три дня'>",
-            "<NotificationFrequency id=4, category='Раз в неделю'>",
-            "<NotificationFrequency id=5, category='Раз в две недели'>",
-            "<NotificationFrequency id=6, category='Раз в месяц'>",
-            "<NotificationFrequency id=7, category='Раз в полгода'>",
-            "<NotificationFrequency id=8, category='Раз в год'>"]
+FREQUENCIES = ["<NotificationFrequency id=1, category='Каждый день', day_plus=1>",
+            "<NotificationFrequency id=2, category='Через день', day_plus=2>",
+            "<NotificationFrequency id=3, category='Раз в три дня', day_plus=3>",
+            "<NotificationFrequency id=4, category='Раз в неделю', day_plus=7>",
+            "<NotificationFrequency id=5, category='Раз в две недели', day_plus=14>",
+            "<NotificationFrequency id=6, category='Раз в месяц', month_plus=1>",
+            "<NotificationFrequency id=7, category='Раз в полгода', month_plus=6>",
+            "<NotificationFrequency id=8, category='Раз в год', month_plus=12>"]
