@@ -10,7 +10,7 @@ from telegram import Message
 def start(bot, update):
     telegram_id = update.effective_message.chat_id
 
-    if not does_telegram_id_exist(telegram_id=telegram_id):
+    if not does_user_exist(telegram_id=telegram_id):
         first_name = update.message.from_user.first_name
         last_name = update.message.from_user.last_name
         login = update.message.from_user.username
