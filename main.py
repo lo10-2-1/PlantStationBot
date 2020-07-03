@@ -23,6 +23,10 @@ def main():
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(helpme_handler)
 
+    # Always should be last
+    unknown_handler = MessageHandler(Filters.command, unknown)
+    dispatcher.add_handler(unknown_handler)
+
     updater.start_polling()
 
 
