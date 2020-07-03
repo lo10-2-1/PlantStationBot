@@ -1,7 +1,4 @@
-from dao import get_user_id_by_telegram_id
-from dao import does_user_plant_exist, get_user_plants, get_user_plant_id
-from dao import add_plant_to_user, update_user_plant_name, delete_user_plant
-from dao import get_plant_notifications, delete_user_notification
+from dao import *
 from commands.keyboards import *
 from commands.tg_commands import start
 from telegram import Message

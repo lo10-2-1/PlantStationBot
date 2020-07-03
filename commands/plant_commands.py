@@ -1,4 +1,4 @@
-from dao import does_plant_exist, get_plant_id_by_title, get_plant
+from dao import *
 from commands.keyboards import *
 from commands.tg_commands import start
 from telegram import Message

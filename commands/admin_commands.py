@@ -1,6 +1,4 @@
-from dao import get_user_role, update_user_role
-from dao import does_telegram_id_exist, get_user_id_by_telegram_id, add_user_by_telegram
-from dao import add_plant, update_plant, does_plant_exist, get_plant_id_by_title
+from dao import *
 from commands.keyboards import *
 from telegram import Message
 

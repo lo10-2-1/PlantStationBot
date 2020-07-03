@@ -1,8 +1,4 @@
-from dao import get_notif_categories, get_notif_category_id
-from dao import get_notif_frequencies, get_notif_frequency_id
-from dao import does_user_notification_exist, get_user_notification_id, get_plant_notifications
-from dao import add_user_notification, update_user_notification, delete_user_notification
-from dao import get_user_id_by_telegram_id, get_user_plants
+from dao import *
 from commands.keyboards import *
 from commands.tg_commands import start
 from telegram import Message
