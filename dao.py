@@ -19,7 +19,7 @@ class NotificationEncoder(json.JSONEncoder):
             return obj.__dict__
 
 
-def does_user_exist(telegram_id=None, login=None) -> bool:
+def does_user_exist(telegram_id=False, login=False) -> bool:
     if telegram_id:
         query = session.query(Users) \
             .filter(Users.telegram_id == telegram_id)
@@ -143,6 +143,13 @@ def get_user_id_by_user_plant_id(user_plant_id: int) -> int:
     return user.user_id
 
 
+def get_plant_name_by_user_plant_id(user_plant_id: int) -> int:
+    user = session.query(UsersPlants) \
+        .filter(UsersPlants.user_plant_id == user_plant_id) \
+        .first()
+    return user.name
+
+
 def add_plant_to_user(user_id: int, plant_name: str, created: str):
     session.add(UsersPlants(user_id=user_id,
                      plant_name=plant_name,
@@ -232,10 +239,11 @@ def get_user_notification_id(user_plant_id: int, notif_category: int) -> int:
 
 
 def get_current_notification():
-    current_time = datetime.datetime.now().strftime('%Y.%m.%d %H:%M:00')
-    notification_time = current_time
+    current_date = datetime.datetime.now().strftime('%d.%m.%Y')
+    current_time = datetime.datetime.now().strftime('%H:%M')
     notification = session.query(UsersNotifications) \
-        .filter(time=notification_time) \
+        .filter(time == notification_time,
+                next_date == current_date) \
         .all()
     notification_j = json.loads(json.dumps(notification, cls=NotificationEncoder, indent=4))
     if notification_j:

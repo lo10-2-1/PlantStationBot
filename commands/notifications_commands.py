@@ -72,17 +72,36 @@ def delete_notification(bot, update):
     pass
 
 
-def send_notification(bot, update):
-    if check_remind():
-        for r in check_remind():
-        remind = f"📌Remind ❗️{r['remind_text']}\n"
-        user_chat_id = r['chat_id']
+def send_notification(bot, job):
+    if get_current_notification():
+        for notif in get_current_notification():
+            category = get_category_by_id(notif['notif_category'])
+            plant_name = get_plant_name_by_user_plant_id(notif['user_plant_id'])
+            notification = 'Пора {0} растение {1}! Давай-давай, время не ждет!' \
+                            .format(category.actions, plant_name)
 
-        bot.send_message(chat_id=user_chat_id, text=remind)
-        remind_button_menu(bot, user_chat_id)
+            user_id = get_user_id_by_user_plant_id(notif['user_plant_id'])
+            telegram_id = get_telegram_id_by_user_id(user_id)
+            bot.send_message(chat_id=telegram_id, text=notification)
+
+            count_next_date(notif)
     else:
         return
 
 
-def count_next_date(bot, update):
-    pass
+def count_next_date(notification):
+    notific_id = notification.notific_id
+    date = notification.next_date
+
+    frequency = get_frequency_by_id(notification.notif_frequency)
+    day_plus = frequency.day_plus
+    month_plus = frequency.month_plus
+    year_plus = frequency.year_plus
+
+    date_list = date.split(sep='.')
+    date_list = map(int, date_list)
+    next_date = datetime.date(date_list[0]+day_plus, 
+                            date_list[1]+month_plus, 
+                            date_list[2]+year_plus) \
+                        .strftime('%d.%m.%Y')
+    update_user_notification(notific_id, next_date=next_date)

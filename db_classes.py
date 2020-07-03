@@ -53,6 +53,7 @@ class NotificationFrequency(Base):
     frequency = Column(Text)
     day_plus = Column(Integer)
     month_plus = Column(Integer)
+    year_plus = Column(Integer)
 
 
 class UsersNotifications(Base):
