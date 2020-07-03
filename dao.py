@@ -2,6 +2,8 @@ from db_classes import *
 from sqlalchemy.orm import sessionmaker, load_only
 from sqlalchemy import create_engine, and_
 from sqlalchemy.sql import func
+import datetime
+import json
 
 engine = create_engine('sqlite:///database.db', echo=True)
 
@@ -9,6 +11,12 @@ Session = sessionmaker(bind=engine)
 Session.configure(bind=engine)
 
 session = Session()
+
+
+class NotificationEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, UsersNotifications):
+            return obj.__dict__
 
 
 def does_telegram_id_exist(telegram_id: int) -> bool:
@@ -182,6 +190,17 @@ def get_user_notification_id(user_plant_id: int, notif_category: int) -> int:
                 UsersNotifications.notif_category.ilike('%{}%'.format(notif_category))) \
         .first()
     return user_notification_id.notific_id
+
+
+def get_current_notification():
+    current_time = datetime.datetime.now().strftime('%Y.%m.%d %H:%M:00')
+    remind_time = current_time
+    remind = session.query(UsersNotifications) \
+        .filter(time=remind_time) \
+        .all()
+    remind_j = json.loads(json.dumps(remind, cls=NotificationEncoder, indent=4))
+    if remind_j:
+        return remind_j
 
 
 def add_user_notification(user_plant_id: int, notif_category: int, notif_frequency: int, time: str, first_date: str):

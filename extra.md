@@ -13,6 +13,10 @@ Then add recognition of the role through keywords in function set_user_role()
 
 **Task:** change all strings with .format() func to f-strings.
 
+3. **Change formatting of SQLalchemy objects to json**
+
+**Task:** change formatting in db_classes and improve dao module.
+
 ## Problems
 1. **show_my_notifications() func in notification_commands**
 
