@@ -12,14 +12,15 @@ def set_user_role(bot, update, args):
 
     if user_role == 1:
         args = args.split('\n')
-        telegram_id = args[0]
+        login = args[0]
         user_role = args[1]
-        if not does_telegram_id_exist(telegram_id):
+        if not does_telegram_id_exist(login=login):
             first_name = update.message.from_user.first_name
             last_name = update.message.from_user.last_name
             login = update.message.from_user.username
             add_user_by_telegram(telegram_id, first_name, last_name, login, user_role)
         else:
+            telegram_id = get_telegram_id_by_login(login)
             user_id = get_user_id_by_telegram_id(telegram_id)
             update_user_role(user_id, user_role)
         bot.send_message(

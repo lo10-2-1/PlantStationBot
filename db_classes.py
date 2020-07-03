@@ -44,6 +44,7 @@ class NotificationCategory(Base):
     __tablename__ = 'NotificationCategory'
     id = Column(Integer, primary_key=True, unique=True)
     category = Column(Text)
+    actions = Column(Text)
 
 
 class NotificationFrequency(Base):

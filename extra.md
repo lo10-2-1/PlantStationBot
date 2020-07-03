@@ -9,6 +9,8 @@
 **Solution:** add new function to dao file. It should return login of the user.
 Then add recognition of the role through keywords in function set_user_role()
 
+- [X] PARTLY SOLVED
+
 2. **Strings refactoring**
 
 **Task:** change all strings with .format() func to f-strings.

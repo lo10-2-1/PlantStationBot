@@ -49,10 +49,11 @@ def show_my_notifications(bot, update):
     for i in range(len(user_plants_list)):
         message_text += '\nУ растения {0}:'.format(user_plants_list[i].name)
         for plant in range(notifications_list[i]):
-            message_text += '\nКатегория {0}, частота {1}, следующее уведомление {2}, {3}.'.format(notifications_list[i].notif_category,
-                                                                                                    notifications_list[i].notif_frequency,
-                                                                                                    notifications_list[i].time,
-                                                                                                    notifications_list[i].next_date)
+            message_text += '\nКатегория {0}, частота {1}, следующее уведомление {2}, {3}.' \
+                            .format(notifications_list[i].notif_category,
+                            notifications_list[i].notif_frequency,
+                            notifications_list[i].time,
+                            notifications_list[i].next_date)
     bot.send_message(
         chat_id=chat_id,
         text=message_text
@@ -71,9 +72,17 @@ def delete_notification(bot, update):
     pass
 
 
-def count_next_date(bot, update):
-    pass
-
-
 def send_notification(bot, update):
+    if check_remind():
+        for r in check_remind():
+        remind = f"📌Remind ❗️{r['remind_text']}\n"
+        user_chat_id = r['chat_id']
+
+        bot.send_message(chat_id=user_chat_id, text=remind)
+        remind_button_menu(bot, user_chat_id)
+    else:
+        return
+
+
+def count_next_date(bot, update):
     pass

@@ -8,10 +8,10 @@ USERS_PLANTS = ["<UsersPlants user_plant_id=1, user_id=1, name='Фиалка р�
 
 NOTIFICATION_1 = ["<UsersNotifications notific_id=1, user_plant_id=1, notif_category=1, notif_frequency=3, time='11:00', first_date='12.05.2020', next_date='19.05.2020'>"]
 
-CATEGORIES = ["<NotificationCategory id=1, category='Полив'>",
-            "<NotificationCategory id=2, category='Опрыскивание'>",
-            "<NotificationCategory id=3, category='Удобрение'>",
-            "<NotificationCategory id=4, category='Пересадка'>"]
+CATEGORIES = ["<NotificationCategory id=1, category='Полив', actions='поливать'>",
+            "<NotificationCategory id=2, category='Опрыскивание', actions='опрыскивать'>",
+            "<NotificationCategory id=3, category='Удобрение', actions='удобрять'>",
+            "<NotificationCategory id=4, category='Пересадка', actions='пересаживать'>"]
 
 FREQUENCIES = ["<NotificationFrequency id=1, category='Каждый день', day_plus=1, month_plus=0>",
             "<NotificationFrequency id=2, category='Через день', day_plus=2, month_plus=0>",

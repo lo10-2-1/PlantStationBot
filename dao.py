@@ -19,9 +19,13 @@ class NotificationEncoder(json.JSONEncoder):
             return obj.__dict__
 
 
-def does_telegram_id_exist(telegram_id: int) -> bool:
-    query = session.query(Users) \
-        .filter(Users.telegram_id == telegram_id)
+def does_user_exist(telegram_id=None, login=None) -> bool:
+    if telegram_id:
+        query = session.query(Users) \
+            .filter(Users.telegram_id == telegram_id)
+    elif login:
+        query = session.query(Users) \
+            .filter(Users.login == login)
     return session.query(query.exists()).scalar()
 
 
@@ -30,6 +34,20 @@ def get_user_id_by_telegram_id(telegram_id: int) -> int:
         .filter(Users.telegram_id == telegram_id) \
         .first()
     return user.user_id
+
+
+def get_telegram_id_by_login(login: str) -> int:
+    user = session.query(Users) \
+        .filter(Users.telegram_id == telegram_id) \
+        .first()
+    return user.login
+
+
+def get_telegram_id_by_user_id(user_id: int) -> int:
+    user = session.query(Users) \
+        .filter(Users.user_id == user_id) \
+        .first()
+    return user.telegram_id
 
 
 def get_user_role(telegram_id: int) -> int:
@@ -116,6 +134,13 @@ def get_user_plant_id(user_id: int, plant_name: str) -> int:
                 UsersPlants.name.ilike('%{}%'.format(plant_name))) \
         .first()
     return user_plant_id.user_plant_id
+
+
+def get_user_id_by_user_plant_id(user_plant_id: int) -> int:
+    user = session.query(UsersPlants) \
+        .filter(UsersPlants.user_plant_id == user_plant_id) \
+        .first()
+    return user.user_id
 
 
 def add_plant_to_user(user_id: int, plant_name: str, created: str):
