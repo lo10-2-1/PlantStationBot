@@ -181,6 +181,13 @@ def get_notif_category_id(category: str) -> int:
     return notif_category_id.id
 
 
+def get_category_by_id(category_id: str) -> int:
+    notif_category = session.query(NotificationCategory) \
+        .filter(NotificationCategory.id == category_id) \
+        .first()
+    return notif_category
+
+
 def get_notif_frequencies():
     notif_frequencies = session.query(NotificationFrequency.frequency) \
         .order_by(NotificationFrequency.id) \
@@ -193,6 +200,13 @@ def get_notif_frequency_id(frequency: str) -> int:
         .filter(NotificationFrequency.frequency.ilike('%{}%'.format(frequency))) \
         .first()
     return notif_frequency_id.id
+
+
+def get_frequency_by_id(frequency_id: str) -> int:
+    notif_frequency = session.query(NotificationFrequency) \
+        .filter(NotificationFrequency.id == frequency_id) \
+        .first()
+    return notif_frequency
 
 
 def does_user_notification_exist(user_plant_id: int, notif_category: int) -> bool:
@@ -219,13 +233,13 @@ def get_user_notification_id(user_plant_id: int, notif_category: int) -> int:
 
 def get_current_notification():
     current_time = datetime.datetime.now().strftime('%Y.%m.%d %H:%M:00')
-    remind_time = current_time
-    remind = session.query(UsersNotifications) \
-        .filter(time=remind_time) \
+    notification_time = current_time
+    notification = session.query(UsersNotifications) \
+        .filter(time=notification_time) \
         .all()
-    remind_j = json.loads(json.dumps(remind, cls=NotificationEncoder, indent=4))
-    if remind_j:
-        return remind_j
+    notification_j = json.loads(json.dumps(notification, cls=NotificationEncoder, indent=4))
+    if notification_j:
+        return notification_j
 
 
 def add_user_notification(user_plant_id: int, notif_category: int, notif_frequency: int, time: str, first_date: str):

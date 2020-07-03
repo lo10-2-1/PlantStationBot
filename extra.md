@@ -22,6 +22,12 @@ Then add recognition of the role through keywords in function set_user_role()
 ## Problems
 1. **show_my_notifications() func in notification_commands**
 
-**Problem:** Yet can't predict how notifications will be shown because of the foreign keys.
+**Problem:** yet can't predict how notifications will be shown because of the foreign keys.
 
-**Solution:** This problem will be resolved later, when tests will be started.
+**Solution:** this problem will be resolved later, when tests will be started.
+
+2. **Add new test functions**
+
+**Problem:** new functions were added to dao module, but none of them have been tested yet.
+
+**Solution:** just do it.
