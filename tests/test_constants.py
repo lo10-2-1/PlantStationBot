@@ -6,7 +6,7 @@ PLANT_1 = "<Plants plant_id=1, name='Фиалка', description='Домашня�
 USERS_PLANTS = ["<UsersPlants user_plant_id=1, user_id=1, name='Фиалка раз'>",
                 "<UsersPlants user_plant_id=2, user_id=1, name='Фиалка два'>"]
 
-NOTIFICATION_1 = ["<UsersNotifications notific_id=1, user_plant_id=1, notif_category=1, notif_frequency=3, time='11:00', first_date='12.05.2020', next_date='19.05.2020'>"]
+NOTIFICATION_1 = ["<UsersNotifications notific_id=1, user_plant_id=1, category=1, frequency=3, time='11:00', first_date='12.05.2020', next_date='19.05.2020'>"]
 
 CATEGORIES = ["<NotificationCategory id=1, category='Полив', actions='поливать'>",
             "<NotificationCategory id=2, category='Опрыскивание', actions='опрыскивать'>",

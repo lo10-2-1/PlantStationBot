@@ -60,8 +60,8 @@ class UsersNotifications(Base):
     __tablename__ = 'UsersNotifications'
     notific_id = Column(Integer, primary_key=True, unique=True)
     user_plant_id = Column(Integer, ForeignKey('UsersPlants.user_plant_id'))
-    notif_category = Column(Integer, ForeignKey('NotificationCategory.id'))
-    notif_frequency = Column(Integer, ForeignKey('NotificationFrequency.id'))
+    category = Column(Integer, ForeignKey('NotificationCategory.id'))
+    frequency = Column(Integer, ForeignKey('NotificationFrequency.id'))
     time = Column(Text)
     first_date = Column(Text)
     next_date = Column(Text)

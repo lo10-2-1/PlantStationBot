@@ -216,10 +216,10 @@ def get_frequency_by_id(frequency_id: str) -> int:
     return notif_frequency
 
 
-def does_user_notification_exist(user_plant_id: int, notif_category: int) -> bool:
+def does_user_notification_exist(user_plant_id: int, category: int) -> bool:
     query = session.query(UsersNotifications) \
         .filter(UsersNotifications.user_plant_id == user_plant_id, 
-                UsersNotifications.notif_category.ilike('%{}%'.format(notif_category)))
+                UsersNotifications.category.ilike('%{}%'.format(category)))
     return session.query(query.exists()).scalar()
 
 
@@ -230,10 +230,10 @@ def get_plant_notifications(user_plant_id: int):
     return user_notifications
 
 
-def get_user_notification_id(user_plant_id: int, notif_category: int) -> int:
+def get_user_notification_id(user_plant_id: int, category: int) -> int:
     user_notification_id = session.query(UsersNotifications) \
         .filter(UsersNotifications.user_plant_id == user_plant_id, 
-                UsersNotifications.notif_category.ilike('%{}%'.format(notif_category))) \
+                UsersNotifications.category.ilike('%{}%'.format(category))) \
         .first()
     return user_notification_id.notific_id
 
@@ -250,10 +250,10 @@ def get_current_notification():
         return notification_j
 
 
-def add_user_notification(user_plant_id: int, notif_category: int, notif_frequency: int, time: str, first_date: str):
+def add_user_notification(user_plant_id: int, category: int, frequency: int, time: str, first_date: str):
     session.add(UsersNotifications(user_plant_id=user_plant_id,
-                     notif_category=notif_category,
-                     notif_frequency=notif_frequency,
+                     category=category,
+                     frequency=frequency,
                      time=time,
                      first_date=first_date
                      )
@@ -261,9 +261,9 @@ def add_user_notification(user_plant_id: int, notif_category: int, notif_frequen
     session.commit()
 
 
-def update_user_notification(notific_id: int, notif_frequency=False, time=False, first_date=False, next_date=False):
-    update = [notif_frequency, time, first_date, next_date]
-    update_title = ['notif_frequency', 'time', 'first_date', 'next_date']
+def update_user_notification(notific_id: int, frequency=False, time=False, first_date=False, next_date=False):
+    update = [frequency, time, first_date, next_date]
+    update_title = ['frequency', 'time', 'first_date', 'next_date']
     for i in range(len(update)):
         if update[i]:
             session.query(UsersNotifications) \
