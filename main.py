@@ -4,12 +4,13 @@ Thanks for help in code (and some ideas):
 https://github.com/ouhettur/boobsbot
 https://github.com/dmakeienko/remind_me_bot
 '''
-from commands.tg_commands import start, info, help, unknown
+from commands.tg_commands import start, info, help_me, unknown
 from commands.plant_commands import plant_inline_keyboard_handler
 from commands.notifications_commands import send_notification
 from commands.admin_commands import set_user_role, answer_to_user
 from commands.admin_commands import add_plant_command, update_plant_command
-from telegram.ext import Updater, CommandHandler
+from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
+from telegram.ext import MessageHandler, Filters
 import logging
 import os
 
@@ -31,11 +32,24 @@ def main():
     dispatcher.add_handler(info_handler)
 
     # Help
-    help_handler = CommandHandler('help', help)
+    help_handler = CommandHandler('help', help_me)
     dispatcher.add_handler(help_handler)
 
-    #Callback for menu
-    dispatcher.add_handler(CallbackQueryHandler(button))
+    # Admin commands
+    set_user_role_handler = CommandHandler('role', set_user_role)
+    answer_to_user_handler = CommandHandler('answer', answer_to_user)
+    add_plant_command_handler = CommandHandler('padd', add_plant_command)
+    update_plant_command_handler = CommandHandler('pubdate', update_plant_command)
+    dispatcher.add_handler(set_user_role_handler)
+    dispatcher.add_handler(answer_to_user_handler)
+    dispatcher.add_handler(add_plant_command_handler)
+    dispatcher.add_handler(update_plant_command_handler)
+    
+    # Jobs
+    j.run_repeating(send_notification, interval=60,  first=0)
+    
+    # Plants inline keyboard
+    dispatcher.add_handler(CallbackQueryHandler(plant_inline_keyboard_handler))
 
     # Always should be last
     unknown_handler = MessageHandler(Filters.command, unknown)
@@ -50,71 +64,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-# Create Updater object and attach dispatcher to it
-  updater = Updater(token=TOKEN)
-  j = updater.job_queue
-  dispatcher = updater.dispatcher
-  # Add command handler to dispatcher
-
-  # Start
-  start_handler = CommandHandler('start', start)
-  dispatcher.add_handler(start_handler)
-
-  # Create Remind
-  create_remind_handler = CommandHandler('remind', create_remind, pass_args=True)
-  dispatcher.add_handler(create_remind_handler)
-  
-  # Create Remind for today
-  create_remind_today_handler = CommandHandler(['today', 'ty', 'at' 'сегодня', 'cьогодні'], create_today, pass_args=True)
-  dispatcher.add_handler(create_remind_today_handler)
-
-  # Create Remind for tomorrow
-  create_remind_tomorrow_handler = CommandHandler(['tomorrow', 'tw', 'завтра'], create_tomorrow, pass_args=True)
-  dispatcher.add_handler(create_remind_tomorrow_handler)
-
-  # List
-  list_handler = CommandHandler('list', list_reminds, pass_args=True)
-  dispatcher.add_handler(list_handler)
-
-  # Jobs
-  j.run_repeating(remind, interval=60,  first=0)
-  j.run_repeating(remind_1, interval=60,  first=0)
-  j.run_repeating(remind_2, interval=60,  first=0)
-  j.run_repeating(check_expired, interval=60,  first=0)
-  
-  # Delete
-  delete_handler = CommandHandler(['delete', 'rm'], delete_remind, pass_args=True)
-  dispatcher.add_handler(delete_handler)
-
-  # Done
-  done_handler =  CommandHandler('done', close_remind, pass_args=True)
-  dispatcher.add_handler(done_handler)
-
-  # Update
-  update_remind_handler = CommandHandler('update', update_remind, pass_args=True)
-  dispatcher.add_handler(update_remind_handler)
-
-  # Update
-  postpone_remind_handler = CommandHandler(['postpone', 'snooze', 'pp'], postpone, pass_args=True)
-  dispatcher.add_handler(postpone_remind_handler)
-
-  # Feedback
-  feedback_remind_handler = CommandHandler('feedback', feedback, pass_args=True)
-  dispatcher.add_handler(feedback_remind_handler)
-  
-  # Help
-  help_remind_handler = CommandHandler('help', help_remind)
-  dispatcher.add_handler(help_remind_handler)
-  
-  # About
-  about_remind_handler = CommandHandler('about', about)
-  dispatcher.add_handler(about_remind_handler)
-  
-  
-
-  # Always should be last
-  unknown_handler = MessageHandler(Filters.command, unknown)
-  dispatcher.add_handler(unknown_handler)
-
-  
