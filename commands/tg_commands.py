@@ -53,7 +53,7 @@ def info(bot, update):
                     text="Чувак, подожди, помощи пока не жди.")
 
 
-def help(bot, update):
+def help_me(bot, update):
     bot.send_message(chat_id=update.message.chat_id, 
                     text="""Хочешь задать вопрос администратору бота? 
                             Напиши его в следующем сообщении.""")
