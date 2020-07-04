@@ -78,9 +78,9 @@ def set_category(bot, update, keyword, plant_name):
     if keyword == ADD or keyword == CHANGE:
         bot.send_message(
             chat_id=chat_id,
-            text='Удаляем уведомление у растения {0} в категории {1}.'.format(plant_name, category)
+            text='Напишите время уведомления в формате ЧЧ:ММ.'
         )
-        set_frequency(bot, update, chat_id, keyword, plant_name, category)
+        set_time(bot, update, keyword, plant_name, category)
     elif keyword == DELETE:
         bot.send_message(
             chat_id=chat_id,
@@ -89,11 +89,45 @@ def set_category(bot, update, keyword, plant_name):
         delete_notification(bot, update, chat_id, plant_name, category)
 
 
-def create_notification(bot, update):
+def set_time(bot, update, keyword, plant_name, category):
+    chat_id = update.effective_message.chat_id
+    time = update.message.text
+    wrong_time = 'Кажется, вы ввели время в неправильном формате. Попробуйте еще раз.'
+
+    check_time = time.split(sep=':')
+    if len(check_time[0]) <= 2:
+        try:
+            check_time = map(int, check_time)
+            frequency_list = get_notif_frequencies()
+            message = 'Теперь нужно написать, как часто вы хотите написать уведомления? Выберите один вариант из списка:'
+            for freq in frequency_list:
+                message += '\n• {}'.format(freq.frequency)
+            bot.send_message(
+                    chat_id=chat_id,
+                    text=message
+                )   
+            set_frequency(bot, update, keyword, plant_name, category, time)
+        except TypeError:
+            bot.send_message(
+                chat_id=chat_id,
+                text=wrong_time
+            )
+    else:
+        bot.send_message(
+            chat_id=chat_id,
+            text=wrong_time
+        )
+
+
+def set_frequency(bot, update, keyword, plant_name, category, time):
     pass
 
 
-def update_notification(bot, update):
+def create_notification(bot, update, plant_name, category, time, frequency, first_date):
+    pass
+
+
+def update_notification(bot, update, plant_name, category, time, frequency, first_date):
     pass
 
 

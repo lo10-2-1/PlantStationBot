@@ -99,9 +99,9 @@ def test_get_notif_categories():
     assert notif_categories == CATEGORIES
 
 
-def test_get_notif_category_id():
-    category_id_1 = get_notif_category_id('Опрыскивание')
-    category_id_2 = get_notif_category_id('пересадка')
+def test_get_category_id():
+    category_id_1 = get_category_id('Опрыскивание')
+    category_id_2 = get_category_id('пересадка')
     assert category_id_1 == 2
     assert category_id_2 == 4
 
@@ -111,9 +111,9 @@ def test_get_notif_frequencies():
     assert notif_frequencies == FREQUENCIES
 
 
-def test_get_notif_frequency_id():
-    frequency_id_1 = get_notif_category_id('Раз в неделю')
-    frequency_id_2 = get_notif_category_id('каждый день')
+def test_get_frequency_id():
+    frequency_id_1 = get_frequency_id('Раз в неделю')
+    frequency_id_2 = get_frequency_id('каждый день')
     assert frequency_id_1 == 4
     assert frequency_id_2 == 1
 

@@ -47,7 +47,7 @@ def show_my_plants(bot, update):
     user_plants_list = get_user_plants(user_id)
     message_text = 'Ваши растения на данный момент:'
     for plant_name in user_plants_list:
-        message_text += '\n• {0}'.format(user_plants_list.name)
+        message_text += '\n• {0}'.format(plant_name.name)
     bot.send_message(
         chat_id=chat_id,
         text=message_text
@@ -108,7 +108,7 @@ def delete_plant(bot, update):
         user_plant_id = get_user_plant_id(user_id, text)
         plant_notifications = get_plant_notifications(user_plant_id)
         for notification in plant_notifications:
-            delete_user_notification(plant_notifications.notific_id)
+            delete_user_notification(notification.notific_id)
         bot.send_message(
             chat_id=chat_id,
             text='Растение "{0}" и его уведомления успешно удалены'.format(text)

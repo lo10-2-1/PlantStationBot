@@ -181,7 +181,7 @@ def get_notif_categories():
     return notif_categories
 
 
-def get_notif_category_id(category: str) -> int:
+def get_category_id(category: str) -> int:
     notif_category_id = session.query(NotificationCategory) \
         .filter(NotificationCategory.category.ilike('%{}%'.format(category))) \
         .first()
@@ -202,7 +202,7 @@ def get_notif_frequencies():
     return notif_frequencies
 
 
-def get_notif_frequency_id(frequency: str) -> int:
+def get_frequency_id(frequency: str) -> int:
     notif_frequency_id = session.query(NotificationFrequency) \
         .filter(NotificationFrequency.frequency.ilike('%{}%'.format(frequency))) \
         .first()
