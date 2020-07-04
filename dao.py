@@ -230,10 +230,10 @@ def get_plant_notifications(user_plant_id: int):
     return user_notifications
 
 
-def get_user_notification_id(user_plant_id: int, category: int) -> int:
+def get_user_notification_id(user_plant_id: int, category_id: int) -> int:
     user_notification_id = session.query(UsersNotifications) \
         .filter(UsersNotifications.user_plant_id == user_plant_id, 
-                UsersNotifications.category.ilike('%{}%'.format(category))) \
+                UsersNotifications.category_id == category_id) \
         .first()
     return user_notification_id.notific_id
 
@@ -250,19 +250,20 @@ def get_current_notification():
         return notification_j
 
 
-def add_user_notification(user_plant_id: int, category: int, frequency: int, time: str, first_date: str):
+def add_user_notification(user_plant_id: int, category_id: int, frequency_id: int, time: str, first_date: str):
     session.add(UsersNotifications(user_plant_id=user_plant_id,
-                     category=category,
-                     frequency=frequency,
+                     category=category_id,
+                     frequency=frequency_id,
                      time=time,
                      first_date=first_date
+                     next_date=first_date
                      )
                 )
     session.commit()
 
 
-def update_user_notification(notific_id: int, frequency=False, time=False, first_date=False, next_date=False):
-    update = [frequency, time, first_date, next_date]
+def update_user_notification(notific_id: int, frequency_id=False, time=False, first_date=False):
+    update = [frequency_id, time, first_date, first_date]
     update_title = ['frequency', 'time', 'first_date', 'next_date']
     for i in range(len(update)):
         if update[i]:
