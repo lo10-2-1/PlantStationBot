@@ -1,6 +1,5 @@
 from dao import *
 from commands.keyboards import *
-from commands.tg_commands import start
 from telegram import Message
 
 
@@ -14,8 +13,9 @@ def plants_keyboard_handler(bot, update):
             text='Какое растение вы хотите найти?'
         )
         search_plant(bot, update)
-    elif text == BACK:
-        return start(bot, update)
+    if text == BACK:
+        import commands.tg_commands as tg
+        return tg.start(bot, update)
 
 
 def search_plant(bot, update):

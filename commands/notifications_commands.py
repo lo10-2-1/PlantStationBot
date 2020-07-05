@@ -1,6 +1,5 @@
 from dao import *
 from commands.keyboards import *
-from commands.tg_commands import start
 from telegram import Message
 import datetime
 
@@ -33,8 +32,9 @@ def notifications_keyboard_handler(bot, update):
             text='Эта команда удаляет уведомление у одного растения в одной из категорий: полив, опрыскивание, удобрение и пересадка. Чтобы начать, напишите название растения, у которого вы хотите удалить уведомление.'
         )
         start_notification_command(bot, update, DELETE)
-    elif text == BACK:
-        return start(bot, update)
+    if text == BACK:
+        import commands.tg_commands as tg
+        return tg.start(bot, update)
 
 
 def show_my_notifications(bot, update):
@@ -167,7 +167,7 @@ def set_frequency(bot, update, keyword, user_plant_id, category_id, time):
         )
 
 
-def set_first_date(bot, update, keyword, user_plant_id, category_id, time, frequency_id)
+def set_first_date(bot, update, keyword, user_plant_id, category_id, time, frequency_id):
     chat_id = update.effective_message.chat_id
     date = update.message.text
     today = datetime.datetime.now()

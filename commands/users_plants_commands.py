@@ -1,6 +1,5 @@
 from dao import *
 from commands.keyboards import *
-from commands.tg_commands import start
 from telegram import Message
 import datetime
 
@@ -36,8 +35,9 @@ def user_plants_keyboard_handler(bot, update):
             parse_mode='Markdown'
         )
         delete_plant(bot, update)
-    elif text == BACK:
-        return start(bot, update)
+    if text == BACK:
+        import commands.tg_commands as tg
+        return tg.start(bot, update)
 
 
 def show_my_plants(bot, update):

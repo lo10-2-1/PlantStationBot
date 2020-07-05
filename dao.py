@@ -251,12 +251,13 @@ def get_current_notification():
 
 
 def add_user_notification(user_plant_id: int, category_id: int, frequency_id: int, time: str, first_date: str):
+    next_date = first_date
     session.add(UsersNotifications(user_plant_id=user_plant_id,
                      category=category_id,
                      frequency=frequency_id,
                      time=time,
-                     first_date=first_date
-                     next_date=first_date
+                     first_date=first_date,
+                     next_date=next_date
                      )
                 )
     session.commit()
