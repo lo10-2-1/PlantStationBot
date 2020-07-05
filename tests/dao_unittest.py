@@ -6,14 +6,26 @@ from tests.test_constants import *
 
 def test_does_telegram_id_exist():
     user_1 = does_telegram_id_exist(USER_2[0])
-    user_2 = does_telegram_id_exist(2438757923547)
+    user_2 = does_telegram_id_exist(USER_2[1])
+    user_3 = does_telegram_id_exist(2438757923547)
     assert user_1 == True
-    assert user_2 == False
+    assert user_2 == True
+    assert user_3 == False
 
 
 def test_get_user_id_by_telegram_id():
     user_id = get_user_id_by_telegram_id(USER_2[0])
     assert user_id == 1
+
+
+def test_get_telegram_id_by_login():
+    telegram_id = get_telegram_id_by_login(USER_2[1])
+    assert telegram_id == USER_2[0]
+
+
+def test_get_telegram_id_by_user_id():
+    telegram_id = get_telegram_id_by_user_id(1)
+    assert telegram_id == USER_2[0]
 
 
 def test_get_user_role():
@@ -80,6 +92,15 @@ def test_get_user_plant_id():
     assert user_plant_id_1 == 1
 
 
+def test_get_user_id_by_user_plant_id():
+    user_id = get_user_id_by_user_plant_id(1)
+    assert user_id == 1
+
+def test_get_plant_name_by_user_plant_id():
+    plant_name = get_plant_name_by_user_plant_id(1)
+    assert plant_name == 'Фиалка раз'
+
+
 def test_add_plant_to_user():
     add_plant_to_user(2, 'Фикус Георгий', str(datetime.datetime.now()))
     add_plant_to_user(2, 'Елощка', str(datetime.datetime.now()))
@@ -106,6 +127,13 @@ def test_get_category_id():
     assert category_id_2 == 4
 
 
+def test_get_category_by_id():
+    category_1 = get_category_by_id(2)
+    category_2 = get_category_by_id(4)
+    assert category_1 == 'Опрыскивание'
+    assert category_2 == 'Пересадка'
+
+
 def test_get_notif_frequencies():
     notif_frequencies = get_notif_frequencies()
     assert notif_frequencies == FREQUENCIES
@@ -116,6 +144,13 @@ def test_get_frequency_id():
     frequency_id_2 = get_frequency_id('каждый день')
     assert frequency_id_1 == 4
     assert frequency_id_2 == 1
+
+
+def get_frequency_by_id():
+    frequency_1 = get_frequency_by_id(4)
+    frequency_2 = get_frequency_by_id(1)
+    assert frequency_1 == 'Раз в неделю'
+    assert frequency_2 == 'Каждый день'
 
 
 def test_does_user_notification_exist():
