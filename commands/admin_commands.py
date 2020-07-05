@@ -30,7 +30,7 @@ def set_user_role(bot, update, args):
     else:
         bot.send_message(
             chat_id=chat_id,
-            text='Упс, только разработчик понимает эту команду'
+            text='Упс, только разработчик понимает эту команду.'
         )
 
 
@@ -47,7 +47,7 @@ def add_plant_command(bot, update, args):
     else:
         bot.send_message(
             chat_id=chat_id,
-            text='Упс, только разработчик понимает эту команду'
+            text='Упс, только разработчик понимает эту команду.'
         )
 
 
@@ -81,7 +81,7 @@ def update_plant_command(bot, update, args):
     else:
         bot.send_message(
             chat_id=chat_id,
-            text='Упс, только разработчик понимает эту команду'
+            text='Упс, только разработчик понимает эту команду.'
         )
 
 
@@ -130,7 +130,6 @@ def ask_admin(bot, update):
 
 
 def answer_to_user(bot, update, args):
-    #add to main.py commands (as /answer)
     chat_id = update.effective_message.chat_d
     user_role = get_user_role(chat_id)
 
@@ -144,7 +143,7 @@ def answer_to_user(bot, update, args):
     else:
         bot.send_message(
             chat_id=chat_id,
-            text='Упс, только разработчик понимает эту команду'
+            text='Упс, только разработчик понимает эту команду.'
         )
 
 
