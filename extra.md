@@ -31,3 +31,5 @@ Then add recognition of the role through keywords in function set_user_role()
 **Problem:** new functions were added to dao module, but none of them have been tested yet.
 
 **Solution:** just do it.
+
+- [X] SOLVED
