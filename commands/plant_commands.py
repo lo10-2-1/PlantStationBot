@@ -22,15 +22,15 @@ def search_plant(bot, update):
     chat_id = update.effective_message.chat_id
     plant_title = update.message.text
 
-    if not does_plant_exist(plant_title):
+    if does_plant_exist(plant_title):
+        plant_id = get_plant_id_by_title(plant_title)
+        plant = get_plant(plant_id)
+        show_plant(bot, update, plant)
+    else:
         return bot.send_message(
             chat_id=chat_id,
             text='Кажется, растения "{}" нет в нашей базе. А может, вы сделали опечатку?'.format(plant_title),
         )
-    else:
-        plant_id = get_plant_id_by_title(plant_title)
-        plant = get_plant(plant_id)
-        show_plant(bot, update, plant)
 
 
 def show_plant(bot, update, plant_obj):
