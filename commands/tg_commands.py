@@ -20,7 +20,7 @@ def start(bot, update):
             Если тебе нужна полная информация по функциям бота, воспользуйся командой /info.
             Также ты можешь задать вопрос администратору с помощью команды /help.""")
     update.message.reply_text(
-        "Выбери, что ты хочешь сделать.",
+        "Выберите, что вы хотите сделать.",
         reply_markup=create_reply_keyboard(MAIN_KEYBOARD)
         )
 
@@ -30,19 +30,19 @@ def main_keyboard_handler(bot, update):
 
     if text == SEARCH:
         update.message.reply_text(
-            "Выбери, что ты хочешь сделать.",
+            "Это раздел растений. Здесь можно почитать про них полезную информацию (если она есть в базе данных).",
             reply_markup=create_reply_keyboard(PLANTS_KEYBOARD)
         )
         return plants_keyboard_handler(bot, update)
     elif text == MY_PLANTS:
         update.message.reply_text(
-            "Выбери, что ты хочешь сделать.",
+            'В разделе "Мои растения" можно создать свою коллекцию растений и управлять ей.',
             reply_markup=create_reply_keyboard(USER_PLANTS_KEYBOARD)
         )
         return user_plants_keyboard_handler(bot, update)
     elif text == NOTIFICATIONS:
         update.message.reply_text(
-            "Выбери, что ты хочешь сделать.",
+            "В разделе уведомлений можно дополнить коллекцию растений напоминаниями о том, когда за растением нужно ухаживать. Можно добавлять, изменять и удалять уведомления.",
             reply_markup=create_reply_keyboard(NOTIFICATIONS_KEYBOARD)
         )
         return notifications_keyboard_handler(bot, update)

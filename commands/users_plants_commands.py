@@ -44,14 +44,20 @@ def show_my_plants(bot, update):
     chat_id = update.effective_message.chat_id
 
     user_id = get_user_id_by_telegram_id(chat_id)
-    user_plants_list = get_user_plants(user_id)
-    message_text = 'Ваши растения на данный момент:'
-    for plant_name in user_plants_list:
-        message_text += '\n• {0}'.format(plant_name.name)
-    bot.send_message(
-        chat_id=chat_id,
-        text=message_text
-    )
+    try:
+        user_plants_list = get_user_plants(user_id)
+        message_text = 'Ваши растения на данный момент:'
+        for plant_name in user_plants_list:
+            message_text += '\n• {0}'.format(plant_name.name)
+        bot.send_message(
+            chat_id=chat_id,
+            text=message_text
+        )
+    except:
+        bot.send_message(
+            chat_id=chat_id,
+            text='Упс, кажется, у вас нет растений. Но их всегда можно добавить.'
+        )
 
 
 def add_my_plant(bot, update):
