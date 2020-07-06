@@ -1,6 +1,12 @@
 from dao import *
 from commands.keyboards import *
+from dotenv import load_dotenv
 from telegram import Message
+import os
+
+load_dotenv()
+
+ADMIN_ID = os.environ.get("ADMIN_ID")
 
 
 def set_user_role(bot, update, args):
@@ -124,7 +130,7 @@ def ask_admin(bot, update):
         text="Спасибо! Ваш вопрос отправлен."
     )
     bot.send_message(
-        chat_id=354668710,
+        chat_id=ADMIN_ID,
         text="Вопрос от пользователя:\n{0}".format(text)
     )
 
