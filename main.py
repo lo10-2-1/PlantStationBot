@@ -9,12 +9,16 @@ from commands.plant_commands import plant_inline_keyboard_handler
 from commands.notifications_commands import send_notification
 from commands.admin_commands import set_user_role, answer_to_user
 from commands.admin_commands import add_plant_command, update_plant_command
+from dotenv import load_dotenv
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 from telegram.ext import MessageHandler, Filters
 import logging
 import os
 
-TOKEN = os.environ.get("PLANTSTATIONBOT_TOKEN")
+load_dotenv()
+
+TOKEN = os.environ.get("TOKEN")
+
 
 def main():
     updater = Updater(token=TOKEN, use_context=True)
