@@ -17,7 +17,8 @@ import os
 TOKEN = os.environ.get("PLANTSTATIONBOT_TOKEN")
 
 def main():
-    updater = Updater(token=TOKEN, use_context=True)
+    updater = Updater(token=TOKEN)
+    j = updater.job_queue
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         
