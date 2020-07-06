@@ -1,12 +1,31 @@
-import unittest
-import datetime
 from dao import *
 from tests.test_constants import *
+from dotenv import load_dotenv
+import unittest
+import datetime
+import os
+
+load_dotenv()
+
+USER_1_ID = os.environ.get("USER_1_ID")
+USER_1_LOGIN = os.environ.get("USER_1_LOGIN")
+USER_2_ID = os.environ.get("USER_2_ID")
+USER_2_LOGIN = os.environ.get("USER_2_LOGIN")
+
+PLANT_1 = os.environ.get("PLANT_1")
+
+USERS_PLANTS = os.environ.get("USERSPLANTS")
+
+NOTIFICATION_1 = os.environ.get("NOTIFICATION_1")
+
+CATEGORIES = os.environ.get("CATEGORIES")
+
+FREQUENCIES = os.environ.get("FREQUENCIES")
 
 
 def test_does_telegram_id_exist():
-    user_1 = does_telegram_id_exist(USER_2[0])
-    user_2 = does_telegram_id_exist(USER_2[1])
+    user_1 = does_telegram_id_exist(USER_2_ID)
+    user_2 = does_telegram_id_exist(USER_2_LOGIN)
     user_3 = does_telegram_id_exist(2438757923547)
     assert user_1 == True
     assert user_2 == True
@@ -14,28 +33,27 @@ def test_does_telegram_id_exist():
 
 
 def test_get_user_id_by_telegram_id():
-    user_id = get_user_id_by_telegram_id(USER_2[0])
+    user_id = get_user_id_by_telegram_id(USER_2_ID)
     assert user_id == 1
 
 
 def test_get_telegram_id_by_login():
-    telegram_id = get_telegram_id_by_login(USER_2[1])
-    assert telegram_id == USER_2[0]
+    telegram_id = get_telegram_id_by_login(USER_2_LOGIN)
+    assert telegram_id == USER_2_ID
 
 
 def test_get_telegram_id_by_user_id():
     telegram_id = get_telegram_id_by_user_id(1)
-    assert telegram_id == USER_2[0]
+    assert telegram_id == USER_2_ID
 
 
 def test_get_user_role():
-    user_role = get_user_role(USER_2[0])
+    user_role = get_user_role(USER_2_ID)
     assert user_role == 1
 
 
 def test_add_user_by_telegram():
-    add_user_by_telegram(USER_1[0], USER_1[1])
-    add_user_by_telegram(USER_2[0], USER_2[1], USER_2[2], USER_2[3], USER_2[4])
+    add_user_by_telegram(USER_1_ID, USER_1_LOGIN)
 
 
 def test_update_user_role():
