@@ -17,12 +17,11 @@ import os
 TOKEN = os.environ.get("PLANTSTATIONBOT_TOKEN")
 
 def main():
-    updater = Updater(token=TOKEN)
+    updater = Updater(token=TOKEN, use_context=True)
     j = updater.job_queue
+    dispatcher = updater.dispatcher
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        
-    dispatcher = updater.dispatcher
 
     # Start
     start_handler = CommandHandler('start', start)
