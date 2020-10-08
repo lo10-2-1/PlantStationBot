@@ -8,7 +8,7 @@ from telegram import Message
 
 
 def start(bot, update):
-    telegram_id = update.effective_message.chat_id
+    telegram_id = update.message.chat.id
 
     if not does_user_exist(telegram_id=telegram_id):
         first_name = update.message.from_user.first_name
