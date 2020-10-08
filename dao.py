@@ -21,6 +21,10 @@ def connect_db(engine):
     session = Session()
     return session
 
+engine = create_engine('sqlite:///database.db', echo=True)
+Session = sessionmaker(bind=engine)
+Session.configure(bind=engine)
+session = Session()
 # engine = eng_cre()
 # session = connect_db(engine)
 
