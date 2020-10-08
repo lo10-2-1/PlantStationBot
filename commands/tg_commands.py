@@ -8,6 +8,7 @@ from telegram import Message
 
 
 def start(bot, update):
+    print(bot, type(bot), update, type(update))
     telegram_id = update.message.chat.id
 
     if not does_user_exist(telegram_id=telegram_id):
