@@ -12,8 +12,9 @@ Base = declarative_base(cls=RepresentableBase)
 def eng_cre():
     engine = create_engine('sqlite:///database.db', echo=True)
     meta = MetaData()
-    meta.create_all(engine)
+    Base.meta.create_all(engine)
     return engine
+
 
 class Users(Base):
     __tablename__ = 'Users'
