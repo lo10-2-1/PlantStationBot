@@ -21,8 +21,8 @@ def connect_db(engine):
     session = Session()
     return session
 
-engine = eng_cre()
-session = connect_db(engine)
+# engine = eng_cre()
+# session = connect_db(engine)
 
 class NotificationEncoder(json.JSONEncoder):
     def default(self, obj):
