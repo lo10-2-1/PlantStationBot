@@ -236,7 +236,7 @@ def delete_notification(bot, update, telegram_id, user_plant_id, category_id):
     )
 
 
-def send_notification(bot, job):
+def send_notification(bot):#, job):
     if get_current_notification():
         for notif in get_current_notification():
             category = get_category_by_id(notif['category'])
