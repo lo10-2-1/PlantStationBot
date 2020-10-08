@@ -7,9 +7,14 @@ import datetime
 import json
 
 
-def connect_db():
-    engine = eng_cre()
+def eng_cre():
+    engine = create_engine('sqlite:///database.db', echo=True)
+    meta = MetaData()
+    Base.metadata.create_all(engine)
+    return engine
 
+
+def connect_db(engine):
     Session = sessionmaker(bind=engine)
     Session.configure(bind=engine)
 
