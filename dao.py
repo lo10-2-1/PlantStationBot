@@ -8,9 +8,7 @@ import json
 
 
 def connect_db():
-    engine = create_engine('sqlite:///database.db', echo=True)
-    meta = MetaData()
-    meta.create_all(engine)
+    eng_cre()
 
     Session = sessionmaker(bind=engine)
     Session.configure(bind=engine)
