@@ -5,12 +5,16 @@ from sqlalchemy.sql import func
 import datetime
 import json
 
-engine = create_engine('sqlite:///database.db', echo=True)
 
-Session = sessionmaker(bind=engine)
-Session.configure(bind=engine)
+def connect_db():
+    if not engine:
+        engine = create_engine('sqlite:///database.db', echo=True)
 
-session = Session()
+    Session = sessionmaker(bind=engine)
+    Session.configure(bind=engine)
+
+    session = Session()
+    return session
 
 
 class NotificationEncoder(json.JSONEncoder):
