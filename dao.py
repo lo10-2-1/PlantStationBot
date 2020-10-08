@@ -15,6 +15,7 @@ def connect_db():
     session = Session()
     return session
 
+session = connect_db()
 
 class NotificationEncoder(json.JSONEncoder):
     def default(self, obj):
