@@ -23,7 +23,6 @@ TOKEN = os.environ.get("TOKEN")
 
 def main():
     dabas = connect_db()
-    dabas.create_all()
     updater = Updater(token=TOKEN, use_context=True)
     j = updater.job_queue
     dispatcher = updater.dispatcher
