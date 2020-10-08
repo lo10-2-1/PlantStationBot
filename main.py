@@ -4,7 +4,7 @@ Thanks for help in code (and some ideas):
 https://github.com/ouhettur/boobsbot
 https://github.com/dmakeienko/remind_me_bot
 '''
-from dao import connect_db
+from dao import connect_db, eng_cre
 from commands.tg_commands import start, info, help_me, unknown
 from commands.plant_commands import plant_inline_keyboard_handler
 from commands.notifications_commands import send_notification
@@ -22,7 +22,8 @@ TOKEN = os.environ.get("TOKEN")
 
 
 def main():
-    dabas = connect_db()
+    engine = eng_cre()
+    dabas = connect_db(engine)
     updater = Updater(token=TOKEN, use_context=True)
     j = updater.job_queue
     dispatcher = updater.dispatcher
