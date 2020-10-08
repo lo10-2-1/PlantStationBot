@@ -1,4 +1,5 @@
 from db_classes import *
+from sqlalchemy import Table, MetaData
 from sqlalchemy.orm import sessionmaker, load_only
 from sqlalchemy import create_engine, and_
 from sqlalchemy.sql import func
@@ -8,6 +9,8 @@ import json
 
 def connect_db():
     engine = create_engine('sqlite:///database.db', echo=True)
+    meta = MetaData()
+    meta.create_all(engine)
 
     Session = sessionmaker(bind=engine)
     Session.configure(bind=engine)
