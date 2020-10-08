@@ -8,7 +8,7 @@ import json
 
 
 def connect_db():
-    eng_cre()
+    engine = eng_cre()
 
     Session = sessionmaker(bind=engine)
     Session.configure(bind=engine)
