@@ -242,8 +242,8 @@ def get_current_notification():
     current_date = datetime.datetime.now().strftime('%d.%m.%Y')
     current_time = datetime.datetime.now().strftime('%H:%M')
     notification = session.query(UsersNotifications) \
-        .filter(time == notification_time,
-                next_date == current_date) \
+        .filter(UsersNotifications.time == current_time,
+                UsersNotifications.next_date == current_date) \
         .all()
     notification_j = json.loads(json.dumps(notification, cls=NotificationEncoder, indent=4))
     if notification_j:
