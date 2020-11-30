@@ -9,12 +9,6 @@ from sqlalchemy_repr import RepresentableBase
 
 Base = declarative_base(cls=RepresentableBase)
 
-def eng_cre():
-    engine = create_engine('sqlite:///database.db', echo=True)
-    meta = MetaData()
-    Base.metadata.create_all(engine)
-    return engine
-
 
 class Users(Base):
     __tablename__ = 'Users'
